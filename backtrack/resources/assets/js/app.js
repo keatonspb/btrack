@@ -26,7 +26,7 @@ $(document).ready(function () {
                console.info($form);
                $(".button", $form).removeAttr("disabled", "disabled");
                if (json.success) {
-                    location.href = "/cabinet/edit/"+json.id;
+                    location.href = "/cabinet/song/edit/"+json.id;
                    $(".alert-success", $form).html(json.message).show();
                } else {
                    $(".alert-danger", $form).html(json.message).show();

@@ -17,11 +17,11 @@ class CreateTracksTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->boolean("status");
+            $table->integer('song_id', false, true);
+            $table->foreign("song_id")->references('id')->on('songs')->onDelete('cascade');
             $table->integer('user_id', false, true)->nullable();
             $table->foreign("user_id")->references('id')->on('users')->onDelete('set null');
-            $table->integer('author_id', false, true)->nullable();
-            $table->foreign("author_id")->references('id')->on('authors')->onDelete('set null');
-            $table->string("name");
+            $table->string("filename");
             $table->boolean("bass")->default(false);
             $table->boolean("drums")->default(false);
             $table->boolean("vocals")->default(false);

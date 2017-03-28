@@ -57,7 +57,7 @@
                             </form>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li><a href="/cabinet/add"><i class="fa fa-plus" aria-hidden="true"></i> Add backing track</a></li>
+                        <li><a href="/cabinet/song/add"><i class="fa fa-plus" aria-hidden="true"></i> Add backing track</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

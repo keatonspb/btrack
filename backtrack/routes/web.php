@@ -15,6 +15,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
-Route::get('/cabinet/add', 'CabinetController@addTrack');
-Route::post('/cabinet/save', 'CabinetController@saveTrack');
-Route::get('/cabinet/edit/{id}', 'CabinetController@editTrack');
+Route::get('/cabinet/song/add', 'CabinetController@addSong');
+Route::post('/cabinet/song/submit', 'CabinetController@submitSong');
+Route::post('/cabinet/song/save', 'CabinetController@saveSong');
+Route::get('/cabinet/song/edit/{id}', 'CabinetController@editSong');

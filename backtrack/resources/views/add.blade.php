@@ -10,7 +10,7 @@
 
                 <div class="panel-body">
 
-                    <form method="post" action="/cabinet/save" class="track-form" enctype="multipart/form-data">
+                    <form method="post" action="/cabinet/song/submit" class="track-form" enctype="multipart/form-data">
                         <div class="alert alert-danger" style="display: none"></div>
                         <div class="alert alert-success" style="display: none"></div>
                         {{ csrf_field() }}
