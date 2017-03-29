@@ -14,6 +14,8 @@
 
 $instrument_icon_height: 24px;
 .instruments {
+  padding: 0;
+  margin: 0;
   list-style: none;
   li {
     display: inline-block;
@@ -48,10 +50,12 @@ $player-control-width: 20%;
 $player-controls-height: 40px;
 $player-timeline-width: 100% - $player-control-width;
 $buttons-numbrer: 3;
+
 .player {
   .controls {
     padding: 10px 0;
     button {
+      width: 42px;
       background: none;
       border: none;
       font-size: 30px;
@@ -77,6 +81,21 @@ $buttons-numbrer: 3;
         transition-property: width;
         height: 100%;
         background: darken($main-color, 4)
+      }
+    }
+  }
+  &.sm {
+    .parts_container {
+      display: none;
+    }
+    .bar {
+      height: 7px;
+    }
+    .controls {
+      padding: 10px 0;
+      button {
+        width: 20px;
+        font-size: 14px;
       }
     }
   }

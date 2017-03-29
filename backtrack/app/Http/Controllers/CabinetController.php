@@ -35,9 +35,27 @@ class CabinetController extends Controller
 
     public function editSong(Request $request, $id) {
         $song = Song::find($id);
+        if(!$song) {
+            abort(404);
+        }
         return view('edit', [
             "song" => $song,
             "author" => $song->author,
+            "tracks" => $song->tracks
+        ]);
+    }
+
+    public function editTrack(Request $request, $id) {
+        $track = Track::find($id);
+
+        if(!$track) {
+            abort(404);
+        }
+        $song = $track->song;
+        return view('edit_track', [
+            "song" => $song,
+            "author" => $song->author,
+            "tracks" => $song->tracks
         ]);
     }
 

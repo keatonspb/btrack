@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -11196,7 +11196,7 @@ process.umask = function() { return 0; };
  */
 
 __webpack_require__(29);
-__webpack_require__(48);
+__webpack_require__(31);
 __webpack_require__(30);
 
 /**
@@ -12079,7 +12079,7 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(32);
+window._ = __webpack_require__(33);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -12089,7 +12089,7 @@ window._ = __webpack_require__(32);
 
 window.$ = window.jQuery = __webpack_require__(1);
 
-__webpack_require__(31);
+__webpack_require__(32);
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -12403,6 +12403,42 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 /* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(jQuery) {
+(function ($) {
+    $.fn.btplayer = function () {
+
+        // Iterate and reformat each matched element.
+        return this.each(function () {
+
+            var elem = $(this);
+            var song = $("audio", elem)[0];
+            var play = $(".play", elem);
+            var prev = $(".prev", elem);
+            var next = $(".next", elem);
+            var progress = $(".progress", elem);
+
+            song.addEventListener('timeupdate', function () {
+                progress.css("width", song.currentTime / song.duration * 100 + "%");
+            });
+            play.click(function () {
+
+                if ($(".fa", this).hasClass("fa-play")) {
+                    song.play();
+                    $(".fa", this).removeClass("fa-play").addClass("fa-pause");
+                } else {
+                    song.pause();
+                    $(".fa", this).removeClass("fa-pause").addClass("fa-play");
+                }
+            });
+        });
+    };
+})(jQuery);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/*!
@@ -14786,7 +14822,7 @@ if (typeof jQuery === 'undefined') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -31875,10 +31911,10 @@ if (typeof jQuery === 'undefined') {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33), __webpack_require__(34)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34), __webpack_require__(35)(module)))
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports) {
 
 var g;
@@ -31905,7 +31941,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -31933,52 +31969,12 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(9);
 module.exports = __webpack_require__(10);
 
-
-/***/ }),
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(jQuery) {
-(function ($) {
-    $.fn.btplayer = function () {
-
-        // Iterate and reformat each matched element.
-        return this.each(function () {
-
-            var elem = $(this);
-            var audio = $("audio", elem);
-            var play = $(".play", elem);
-            var prev = $(".prev", elem);
-            var next = $(".next", elem);
-            var progress = $(".progress", elem);
-
-            var song = new Audio(audio.attr("src"));
-            song.play();
-            song.addEventListener('timeupdate', function () {
-                progress.css("width", song.currentTime / song.duration * 100 + "%");
-            });
-        });
-    };
-})(jQuery);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ })
 /******/ ]);

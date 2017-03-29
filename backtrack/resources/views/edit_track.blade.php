@@ -6,28 +6,9 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Tracks</div>
+                    <div class="panel-heading">Track</div>
                     <div class="panel-body">
-                        @foreach($tracks as $track)
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    @include("frg/player", ['file'=>$track->getFilePath(), 'class'=>'sm'])
-                                </div>
-                                <div class="col-sm-4">
-                                    <ul class="instruments">
-                                        <li class="lead_guitar @if($track->lead) active @endif"></li>
-                                        <li class="rhythm_guitar @if($track->rhythm) active @endif"></li>
-                                        <li class="bass @if($track->bass) active @endif"></li>
-                                        <li class="voice @if($track->voice) active @endif"></li>
-                                        <li class="drums @if($track->drums) active @endif"></li>
-                                        <li class="keys @if($track->keys) active @endif"></li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-2">
-                                    <a class="btn btn-info btn-sm" href="/cabinet/track/edit/{{$track->id}}" >Edit</a>
-                                </div>
-                            </div>
-                        @endforeach
+
                     </div>
                 </div>
             </div>
