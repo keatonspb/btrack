@@ -74,6 +74,7 @@ $buttons-numbrer: 3;
       height: 15px;
       background: $main-color;
       .progress {
+        transition-property: width;
         height: 100%;
         background: darken($main-color, 4)
       }

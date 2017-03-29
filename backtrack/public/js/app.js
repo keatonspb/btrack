@@ -31973,7 +31973,6 @@ module.exports = __webpack_require__(10);
             var song = new Audio(audio.attr("src"));
             song.play();
             song.addEventListener('timeupdate', function () {
-                console.info(curtime, song.currentTime / song.duration * 100 + "%");
                 progress.css("width", song.currentTime / song.duration * 100 + "%");
             });
         });
