@@ -11196,6 +11196,7 @@ process.umask = function() { return 0; };
  */
 
 __webpack_require__(29);
+__webpack_require__(48);
 __webpack_require__(30);
 
 /**
@@ -11205,6 +11206,7 @@ __webpack_require__(30);
  */
 
 $(document).ready(function () {
+    $(".player").btplayer();
     $(".track-form").ajaxForm({
         beforeSubmit: function beforeSubmit($form) {
             $(".alert", $form).hide();
@@ -31937,6 +31939,47 @@ module.exports = function(module) {
 __webpack_require__(9);
 module.exports = __webpack_require__(10);
 
+
+/***/ }),
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(jQuery) {
+(function ($) {
+    $.fn.btplayer = function () {
+
+        // Iterate and reformat each matched element.
+        return this.each(function () {
+
+            var elem = $(this);
+            var audio = $("audio", elem);
+            var play = $(".play", elem);
+            var prev = $(".prev", elem);
+            var next = $(".next", elem);
+            var progress = $(".progress", elem);
+
+            var song = new Audio(audio.attr("src"));
+            song.play();
+            song.addEventListener('timeupdate', function () {
+                console.info(curtime, song.currentTime / song.duration * 100 + "%");
+                progress.css("width", song.currentTime / song.duration * 100 + "%");
+            });
+        });
+    };
+})(jQuery);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ })
 /******/ ]);

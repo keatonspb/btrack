@@ -43,3 +43,40 @@ $instrument_icon_height: 24px;
     }
   }
 }
+
+$player-control-width: 20%;
+$player-controls-height: 40px;
+$player-timeline-width: 100% - $player-control-width;
+$buttons-numbrer: 3;
+.player {
+  .controls {
+    padding: 10px 0;
+    button {
+      background: none;
+      border: none;
+      font-size: 30px;
+    }
+  }
+  .timeline {
+    .parts_container {
+      height: 20px;
+      font-size: 10px;
+      position: relative;
+      .part {
+        display: block;
+        position: absolute;
+        border-left: 1px solid #fff;
+        padding-bottom: 19px;
+      }
+    }
+    .bar {
+      width: 100%;
+      height: 15px;
+      background: $main-color;
+      .progress {
+        height: 100%;
+        background: darken($main-color, 4)
+      }
+    }
+  }
+}

@@ -8,9 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">{{$song->name}} - {{$author->name}}</div>
                 <div class="panel-body">
-                    <div class="player">
-                        <audio src="{{$file}}" controls />
-                    </div>
+                    @include("frg/player")
                 </div>
             </div>
         </div>

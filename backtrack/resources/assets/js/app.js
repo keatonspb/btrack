@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('./player');
 require('./components/jquery.form.min');
 
 /**
@@ -15,6 +16,7 @@ require('./components/jquery.form.min');
  */
 
 $(document).ready(function () {
+    $(".player").btplayer();
    $(".track-form").ajaxForm(
        {
            beforeSubmit: function ($form) {
