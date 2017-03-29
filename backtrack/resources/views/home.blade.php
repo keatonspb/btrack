@@ -9,9 +9,7 @@
                 <div class="panel-heading">Last added</div>
 
                 <div class="panel-body">
-                    <form>
-                        <input type="file" name="file">
-                    </form>
+                    @include("frg/songs_list")
                 </div>
             </div>
         </div>

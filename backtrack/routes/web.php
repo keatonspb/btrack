@@ -19,3 +19,4 @@ Route::get('/cabinet/song/add', 'CabinetController@addSong');
 Route::post('/cabinet/song/submit', 'CabinetController@submitSong');
 Route::post('/cabinet/song/save', 'CabinetController@saveSong');
 Route::get('/cabinet/song/edit/{id}', 'CabinetController@editSong');
+Route::get('/song/{id}', 'HomeController@song');

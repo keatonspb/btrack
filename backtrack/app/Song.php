@@ -25,6 +25,12 @@ class Song extends Model
         return $this->belongsTo('App\Author');
     }
 
+    public function tracks()
+    {
+        return $this->hasMany('App\Track');
+    }
+
+
     public static function getOrCreate($name, $author)
     {
         $song = null;

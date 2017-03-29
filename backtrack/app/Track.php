@@ -29,7 +29,7 @@ class Track extends Model
         return $filename;
     }
     public function getFilePath() {
-        return Storage::disk("s3")->url(self::$folder."/".$this->id);
+        return Storage::disk("s3")->url(self::$folder."/".$this->filename);
     }
     public function author()
     {

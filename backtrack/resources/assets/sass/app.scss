@@ -1,18 +1,45 @@
-
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700&subset=cyrillic');
-
 // Variables
-
 @import "_variables";
-
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
 
 .navbar-form {
   .form-control, .btn-default {
     border-color: #24A661;
     color: #24A661;
+  }
+}
+
+$instrument_icon_height: 24px;
+.instruments {
+  list-style: none;
+  li {
+    display: inline-block;
+    width: $instrument_icon_height;
+    height: $instrument_icon_height;
+    opacity: 0.2;
+    &.active {
+      opacity: 1;
+    }
+    &.voice {
+      background: url("img/microphone-2.svg");
+    }
+    &.drums {
+      background: url("img/drums.svg");
+    }
+    &.bass {
+      background: url("img/electric-guitar.svg");
+    }
+    &.lead_guitar {
+      background: url("img/electric-guitar.svg");
+    }
+    &.rhythm_guitar {
+      background: url("img/electric-guitar.svg");
+    }
+    &.keys {
+      background: url("img/piano-keys.svg");
+    }
   }
 }
