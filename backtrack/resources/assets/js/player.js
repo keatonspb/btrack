@@ -47,12 +47,12 @@
             });
 
             if(elem.hasClass("editable")) {
-                jQuery( ".part" ).draggable({ axis: "x" });
+                $( ".part" ).draggable({ axis: "x" });
             }
 
 
         });
-        
+
         function maketime(mtime) {
 
             mtime = Math.round(mtime);

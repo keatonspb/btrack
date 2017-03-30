@@ -6,8 +6,8 @@
  */
 
 require('./bootstrap');
-require('jquery-ui');
 require('./player');
+require('jquery-ui')
 require('./components/jquery.form.min');
 
 /**

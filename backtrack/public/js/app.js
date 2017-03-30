@@ -11196,8 +11196,8 @@ process.umask = function() { return 0; };
  */
 
 __webpack_require__(29);
-__webpack_require__(50);
 __webpack_require__(31);
+__webpack_require__(50);
 __webpack_require__(30);
 
 /**
@@ -12453,7 +12453,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             });
 
             if (elem.hasClass("editable")) {
-                jQuery(".part").draggable({ axis: "x" });
+                $(".part").draggable({ axis: "x" });
             }
         });
 
