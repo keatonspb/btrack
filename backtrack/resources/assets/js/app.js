@@ -8,6 +8,8 @@
 require('./bootstrap');
 require('./player');
 require('jquery-ui')
+require('jquery-ui/ui/widgets/draggable');
+
 require('./components/jquery.form.min');
 
 /**

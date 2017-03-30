@@ -65,11 +65,12 @@ $player-control-width: 20%;
 $player-controls-height: 40px;
 $player-timeline-width: 100% - $player-control-width;
 $buttons-numbrer: 3;
+$player-part-height: 20px;
 
 .player {
-  .editable {
+  &.editable {
     .part {
-      cursor: move;
+      cursor: w-resize;
     }
   }
   .controls {
@@ -89,18 +90,40 @@ $buttons-numbrer: 3;
       float: right;
     }
   }
-
   .timeline {
+    &:hover {
+      .part {
+        opacity: 0.3;
+      }
+    }
     .parts_container {
-      height: 20px;
+      margin-top: 30px;
+      height: $player-part-height;
       font-size: 10px;
       position: relative;
       .part {
+        &:hover {
+          opacity: 1;
+        }
+        span {
+          display: block;
+          transform: rotate(-45deg);
+          transform-origin: bottom left;
+        }
+        transition: opacity .15s ease-in-out;
+        padding-left: 1px;
         z-index: 1000;
+        height: $player-part-height;
         display: block;
         position: absolute;
-        border-left: 1px solid #fff;
-        padding-bottom: 19px;
+        .cue {
+          left: 0;
+          width: 1px;
+          height: $player-part-height*2;
+          position: absolute;
+          background: #fff;
+          display: block;
+        }
       }
     }
     &:hover {
@@ -128,7 +151,7 @@ $buttons-numbrer: 3;
       .progress {
         transition-property: width;
         height: 100%;
-        background: darken($main-color, 4)
+        background: darken($main-color, 6)
       }
     }
   }
