@@ -55,7 +55,7 @@ class CabinetController extends Controller
         return view('edit_track', [
             "song" => $song,
             "author" => $song->author,
-            "tracks" => $song->tracks
+            "file" => $track->getFilePath()
         ]);
     }
 

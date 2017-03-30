@@ -8,7 +8,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Track</div>
                     <div class="panel-body">
-
+                        @include("frg/player", ['class'=>'editable'])
                     </div>
                 </div>
             </div>

@@ -1,10 +1,25 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700&subset=cyrillic,cyrillic-ext');
 // Variables
 @import "_variables";
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+.navbar-logo {
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  background: url("img/logo_w.svg") no-repeat;
+  background-size: contain;
+}
+.navbar-brand {
+  span {
+    vertical-align: top;
+    display: inline-block;
+    margin-top: -1px;
+    font-weight: bold;
+  }
+}
 .navbar-form {
   .form-control, .btn-default {
     border-color: #24A661;
@@ -52,31 +67,64 @@ $player-timeline-width: 100% - $player-control-width;
 $buttons-numbrer: 3;
 
 .player {
-  .controls {
-    padding: 10px 0;
-    button {
-      width: 42px;
-      background: none;
-      border: none;
-      font-size: 30px;
+  .editable {
+    .part {
+      cursor: move;
     }
   }
+  .controls {
+    padding: 10px 0;
+    .buttons {
+      display: inline-block;
+      button {
+        width: 42px;
+        background: none;
+        border: none;
+        font-size: 30px;
+      }
+    }
+
+    .time {
+      display: inline-block;
+      float: right;
+    }
+  }
+
   .timeline {
     .parts_container {
       height: 20px;
       font-size: 10px;
       position: relative;
       .part {
+        z-index: 1000;
         display: block;
         position: absolute;
         border-left: 1px solid #fff;
         padding-bottom: 19px;
       }
     }
+    &:hover {
+      .cursor {
+        display: block;
+      }
+    }
     .bar {
       width: 100%;
       height: 15px;
       background: $main-color;
+      position: relative;
+      cursor: pointer;
+
+      .cursor {
+        z-index: 1001;
+        display: none;
+        width: 1px;
+        background: $text-color;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
       .progress {
         transition-property: width;
         height: 100%;
@@ -84,6 +132,7 @@ $buttons-numbrer: 3;
       }
     }
   }
+
   &.sm {
     .parts_container {
       display: none;
@@ -93,10 +142,15 @@ $buttons-numbrer: 3;
     }
     .controls {
       padding: 10px 0;
-      button {
-        width: 20px;
-        font-size: 14px;
+      .buttons {
+
+        button {
+          width: 20px;
+          font-size: 14px;
+        }
       }
+
+
     }
   }
 }

@@ -38,8 +38,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <i class="fa fa-music" aria-hidden="true"></i>
-                        {{ config('app.name', 'Laravel') }}
+                        <i class="navbar-logo"></i><span>{{ config('app.name', 'Laravel') }}</span>
                     </a>
                 </div>
 
