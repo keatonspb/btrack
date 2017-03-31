@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 require('./player');
-require('jquery-ui')
+require('jquery-ui');
 require('jquery-ui/ui/widgets/draggable');
 
 require('./components/jquery.form.min');
@@ -22,6 +22,11 @@ $(document).ready(function () {
     $(".player").btplayer();
    $(".track-form").ajaxForm(
        {
+           uploadProgress: function(event, pos, total, percentComplete) {
+               $(".track-form .progress").show();
+               $(".track-form .progress .progress-bar").css("width", percentComplete+"%");
+               $(".track-form .progress .progress-bar .sr-only").html(percentComplete+"%")
+           },
            beforeSubmit: function ($form) {
                $(".alert", $form).hide();
                $(".button", $form).attr("disabled", "disabled");
