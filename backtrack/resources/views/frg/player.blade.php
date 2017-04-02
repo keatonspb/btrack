@@ -5,7 +5,7 @@
             @foreach($track->getCues() as $cue)
                 <div class="part" style="left: {{$cue->perc}}%">
                     <div class="cue"></div>
-                    <span>intro</span></div>
+                    <span>{{$cue->name}}</span></div>
             @endforeach
         </div>
         <div class="bar">
