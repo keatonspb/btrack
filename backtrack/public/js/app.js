@@ -13361,8 +13361,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 $("#edit_cue_dialog .btn-primary").click(function () {
                     cue_dialog.modal("hide");
                     cue = $("<div class='part'/>");
-                    perc = song.currentTime / song.duration;
-                    cue.css("left", perc * 100 + "%");
+                    perc = song.currentTime / song.duration * 100;
+                    cue.css("left", perc + "%");
                     cue_name = $("select", cue_dialog).val();
                     cue.html("<div class='cue'></div> <span>" + $("select option:selected", cue_dialog).html() + "</span>");
                     $(".parts_container", elem).prepend(cue);
