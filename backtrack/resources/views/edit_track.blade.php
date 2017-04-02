@@ -4,41 +4,34 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Track</div>
+                    <div class="panel-heading">{{$song->name}} - {{$author->name}}
+                    <div class="pull-left"></div>
+                    </div>
                     <div class="panel-body">
                         @include("frg/player", ['class'=>'editable'])
+                        @include("frg/edit_cue_dialog")
+                    <form action="/cabinet/track/save" class="edit_track_form" method="post">
+                        {{ csrf_field() }}
+                        <input name="id" type="hidden" value="{{$track->id}}" />
+                        <div class="cue_container">
+
+                        </div>
+                        <div class="checkbox-inline "><label><input class="edit_instrument" data-id="{{$track->id}}" type="checkbox"  name="bass" value="1" @if($track->bass) checked @endif> bass</label></div>
+                        <div class="checkbox-inline"><label><input class="edit_instrument" data-id="{{$track->id}}" type="checkbox" name="drums" value="1" @if($track->drums) checked @endif> drums</label></div>
+                        <div class="checkbox-inline"><label><input class="edit_instrument" data-id="{{$track->id}}" type="checkbox" name="vocals" value="1" @if($track->vocals) checked @endif> vocals</label></div>
+                        <div class="checkbox-inline"><label><input class="edit_instrument" data-id="{{$track->id}}" type="checkbox" name="lead" value="1" @if($track->lead) checked @endif> lead guitar</label></div>
+                        <div class="checkbox-inline"><label><input class="edit_instrument" data-id="{{$track->id}}" type="checkbox" name="rhythm" value="1" @if($track->rhythm) checked @endif> rhythm guitar</label></div>
+                        <div class="checkbox-inline"><label><input class="edit_instrument" data-id="{{$track->id}}" type="checkbox" name="keys" value="1" @if($track->keys) checked @endif> keys</label></div>
+                        <div>
+                            <button class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Song info</div>
-                    <div class="panel-body">
-                        <form method="post" action="/cabinet/song/save" class="track-form"
-                              enctype="multipart/form-data">
-                            <input type="hidden" name="id" value="{{$song->id}}">
-                            <div class="alert alert-danger" style="display: none"></div>
-                            <div class="alert alert-success" style="display: none"></div>
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input class="form-control" name="name" value="{{$song->name}}" required/>
-                            </div>
-                            <div class="form-group">
-                                <label>Artist name</label>
-                                <input class="form-control" name="author" value="{{$author->name}}" required/>
-                            </div>
 
-
-                            <div>
-                                <button type="submit" class="btn btn-primary">Сохранить</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection

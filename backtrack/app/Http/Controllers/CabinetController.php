@@ -33,33 +33,39 @@ class CabinetController extends Controller
         return view('add');
     }
 
-    public function editSong(Request $request, $id) {
+    public function editSong(Request $request, $id)
+    {
         $song = Song::find($id);
-        if(!$song) {
+        if (!$song) {
             abort(404);
         }
         return view('edit', [
             "song" => $song,
             "author" => $song->author,
-            "tracks" => $song->tracks
+            "tracks" => $song->tracks,
+
         ]);
     }
 
-    public function editTrack(Request $request, $id) {
+    public function editTrack(Request $request, $id)
+    {
         $track = Track::find($id);
 
-        if(!$track) {
+        if (!$track) {
             abort(404);
         }
         $song = $track->song;
         return view('edit_track', [
             "song" => $song,
             "author" => $song->author,
-            "file" => $track->getFilePath()
+            "track" => $track,
+            "cues" => $track->getCues(),
+            "acues" => Track::CUES
         ]);
     }
 
-    public function submitSong(Request $request) {
+    public function submitSong(Request $request)
+    {
         $json = [
             "success" => true,
             "message" => "Song added"
@@ -87,12 +93,13 @@ class CabinetController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             $json['success'] = false;
-            $json['message'] = $e->getMessage()." ".$e->getFile()." ".$e->getLine();
+            $json['message'] = $e->getMessage() . " " . $e->getFile() . " " . $e->getLine();
         }
         return response()->json($json);
     }
 
-    public function saveSong(Request $request) {
+    public function saveSong(Request $request)
+    {
         $json = [
             "success" => true,
             "message" => "Song saved"
@@ -109,7 +116,7 @@ class CabinetController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             $json['success'] = false;
-            $json['message'] = $e->getMessage()." ".$e->getFile()." ".$e->getLine();
+            $json['message'] = $e->getMessage() . " " . $e->getFile() . " " . $e->getLine();
         }
         return response()->json($json);
     }
@@ -122,31 +129,39 @@ class CabinetController extends Controller
         ];
         try {
             DB::beginTransaction();
-            $author = Author::getOrCreate($request->get("author"));
-            $row = [
-                "status" => 1,
-                "author_id" => $author->id,
-                "user_id" => Auth::user()->id,
-                "bass" => $request->get("bass", false),
-                "drums" => $request->get("drums", false),
-                "vocals" => $request->get("vocals", false),
-                "lead" => $request->get("lead", false),
-                "rhythm" => $request->get("rhythm", false),
-                "keys" => $request->get("keys", false),
-            ];
-            if (!$id = $request->get("id")) {
-                $track = Track::create($row);
-                $track->upload($request->file("track"));
-            } else {
-                $track = Track::find($id);
-                $track->update($row);
+            if (!$request->get("id")) {
+                throw new \Exception("Bad request");
             }
-            $json['id'] = $track->id;
+
+            $track = Track::find($request->get("id"));
+            if (!$track) {
+                throw new \Exception("Track not found");
+            }
+            $track->bass = $request->get("bass", false);
+            $track->drums = $request->get("drums", false);
+            $track->vocals = $request->get("vocals", false);
+            $track->lead = $request->get("lead", false);
+            $track->rhythm = $request->get("rhythm", false);
+            $track->keys = $request->get("keys", false);
+            $props = [];
+            $cues = [];
+            foreach (array_keys(Track::CUES) as $cue) {
+                foreach ($request->get($cue, []) as $time) {
+                    $cues[] = [
+                        "name" => $cue,
+                        "perc" => $time
+                    ];
+                }
+            }
+            $props['cues'] = $cues;
+            $track->properties = json_encode($props);
+            $track->save();
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             $json['success'] = false;
-            $json['message'] = $e->getMessage()." ".$e->getFile()." ".$e->getLine();
+            $json['message'] = $e->getMessage() . " " . $e->getFile() . " " . $e->getLine();
         }
         return response()->json($json);
     }

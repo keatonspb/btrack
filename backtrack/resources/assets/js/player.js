@@ -47,11 +47,33 @@
             });
 
             if(elem.hasClass("editable")) {
-                $( ".part" ).draggable({ axis: "x" });
+                $( ".part" ).draggable({ axis: "x", containment: "parent" });
+                var cue_dialog = $("#edit_cue_dialog");
+                $(".add_cue").click(function () {
+                    cue_dialog.modal();
+                });
+
+                $("#edit_cue_dialog .btn-primary").click(function() {
+                    cue_dialog.modal("hide");
+                    cue = $("<div class='part'/>");
+                    perc = song.currentTime/song.duration;
+                    cue.css("left", perc*100+"%");
+                    cue_name = $("select", cue_dialog).val();
+                    cue.html("<div class='cue'></div> <span>"+$("select option:selected", cue_dialog).html()+"</span>");
+                    $(".parts_container", elem).prepend(cue);
+                    input = $("<input type='hidden' id='cue_' name='"+cue_name+"[]' value='"+perc+"' />");
+                    $(".cue_container").append(input);
+                    $( ".part" ).draggable({ axis: "x", containment: "parent", stop: function () {
+                        syncCues();
+                    }});
+                });
             }
 
 
         });
+        function syncCues() {
+            
+        }
 
         function maketime(mtime) {
 

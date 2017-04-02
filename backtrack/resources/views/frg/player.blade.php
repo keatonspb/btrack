@@ -1,19 +1,29 @@
 <div class="player {{$class|""}}">
-    <audio src="{{$file}}"></audio>
+    <audio src="{{$track->getFilePath()}}"></audio>
     <div class="timeline">
         <div class="parts_container">
-            <div class="part" style="left: 1%"><div class="cue"></div><span>intro</span></div>
-            <div class="part" style="left: 10%"><div class="cue"></div><span>pre-chorus</span></div>
-            <div class="part" style="left: 40%"><div class="cue"></div><span>chorus</span></div>
+            @foreach($track->getCues() as $cue)
+                <div class="part" style="left: {{$cue->perc}}%">
+                    <div class="cue"></div>
+                    <span>intro</span></div>
+            @endforeach
         </div>
-        <div class="bar"><div class="progress" style="width: 0%;"></div><div class="cursor"></div> </div>
+        <div class="bar">
+            <div class="progress" style="width: 0%;"></div>
+            <div class="cursor"></div>
+        </div>
     </div>
     <div class="controls">
         <div class="buttons">
-        <button class="play"><i class="fa fa-play" aria-hidden="true"></i></button>
-        <button class="prev"><i class="fa fa-fast-backward" aria-hidden="true"></i></button>
-        <button class="next"><i class="fa fa-fast-forward" aria-hidden="true"></i></button>
-        <button class="add_cue"><i class="fa fa-fast-forward" aria-hidden="true"></i></button>
+            <button title="Play" class="play"><i class="fa fa-play" aria-hidden="true"></i></button>
+            <button title="Previous cue" class="prev"><i class="fa fa-fast-backward" aria-hidden="true"></i></button>
+            <button title="Next cue" class="next"><i class="fa fa-fast-forward" aria-hidden="true"></i></button>
+            @if($class == 'editable')
+                <button title="Add cue" class="add_cue"><i class="text-primary fa fa-plus" aria-hidden="true"></i>
+                </button>
+                <button title="Remove cue" class="del_cue"><i class="text-primary fa fa-minus" aria-hidden="true"></i>
+                </button>
+            @endif
         </div>
         <div class="time">
             <span class="cur">00:00</span> / <span class="all">00:00</span>

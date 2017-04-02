@@ -37,23 +37,24 @@ $instrument_icon_height: 24px;
     width: $instrument_icon_height;
     height: $instrument_icon_height;
     opacity: 0.2;
+    background-size: cover;
     &.active {
       opacity: 1;
     }
     &.voice {
-      background: url("img/microphone-2.svg");
+      background-image: url("img/microphone-2.svg");
     }
     &.drums {
-      background: url("img/drums.svg");
+      background-image: url("img/drums.svg");
     }
     &.bass {
-      background: url("img/electric-guitar.svg");
+      background-image: url("img/electric-guitar_bass.svg");
     }
     &.lead_guitar {
-      background: url("img/electric-guitar.svg");
+      background-image: url("img/electric-guitar_lead.svg");
     }
     &.rhythm_guitar {
-      background: url("img/electric-guitar.svg");
+      background-image: url("img/electric-guitar_rhytm.svg");
     }
     &.keys {
       background: url("img/piano-keys.svg");
@@ -102,6 +103,7 @@ $player-part-height: 20px;
       font-size: 10px;
       position: relative;
       .part {
+        top: 0;
         &:hover {
           opacity: 1;
         }
@@ -117,6 +119,7 @@ $player-part-height: 20px;
         display: block;
         position: absolute;
         .cue {
+          top: 0;
           left: 0;
           width: 1px;
           height: $player-part-height*2;

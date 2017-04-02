@@ -32,7 +32,6 @@
                                 <div class="checkbox-inline"><label><input type="checkbox" name="lead" value="1" checked> lead guitar</label></div>
                                 <div class="checkbox-inline"><label><input type="checkbox" name="rhythm" value="1" checked> rhythm guitar</label></div>
                                 <div class="checkbox-inline"><label><input type="checkbox" name="keys" value="1" checked> keys</label></div>
-
                             </div>
                         </div>
                         <div class="form-group">

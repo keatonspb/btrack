@@ -20,4 +20,5 @@ Route::post('/cabinet/song/submit', 'CabinetController@submitSong');
 Route::post('/cabinet/song/save', 'CabinetController@saveSong');
 Route::get('/cabinet/song/edit/{id}', 'CabinetController@editSong');
 Route::get('/cabinet/track/edit/{id}', 'CabinetController@editTrack');
+Route::post('/cabinet/track/save', 'CabinetController@saveTrack');
 Route::get('/song/{id}', 'HomeController@song');

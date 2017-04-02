@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 46);
+/******/ 	return __webpack_require__(__webpack_require__.s = 47);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -11956,18 +11956,18 @@ process.umask = function() { return 0; };
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {
-/**
+/* WEBPACK VAR INJECTION */(function($) {/**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
 
 __webpack_require__(31);
-__webpack_require__(33);
+__webpack_require__(34);
 __webpack_require__(4);
-__webpack_require__(41);
+__webpack_require__(42);
 
+__webpack_require__(33);
 __webpack_require__(32);
 
 /**
@@ -11978,6 +11978,22 @@ __webpack_require__(32);
 
 $(document).ready(function () {
     $(".player").btplayer();
+    $(".edit_track_form").ajaxForm({
+        dataType: "json",
+        success: function success(json, statusText, xhr, $form) {
+            if (json.success) {
+                $.notify({
+                    message: json.message
+                });
+            } else {
+                $.notify({
+                    message: json.message
+                }, {
+                    type: 'danger'
+                });
+            }
+        }
+    });
     $(".track-form").ajaxForm({
         uploadProgress: function uploadProgress(event, pos, total, percentComplete) {
             $(".track-form .progress").show();
@@ -12855,7 +12871,7 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(43);
+window._ = __webpack_require__(44);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -12865,7 +12881,7 @@ window._ = __webpack_require__(43);
 
 window.$ = window.jQuery = __webpack_require__(0);
 
-__webpack_require__(34);
+__webpack_require__(35);
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -12903,6 +12919,114 @@ window.axios.defaults.headers.common = {
 
 /***/ }),
 /* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+!function (t) {
+   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (t),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : t("object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? require("jquery") : jQuery);
+}(function (t) {
+  function s(s) {
+    var e = !1;return t('[data-notify="container"]').each(function (i, n) {
+      var a = t(n),
+          o = a.find('[data-notify="title"]').text().trim(),
+          r = a.find('[data-notify="message"]').html().trim(),
+          l = o === t("<div>" + s.settings.content.title + "</div>").html().trim(),
+          d = r === t("<div>" + s.settings.content.message + "</div>").html().trim(),
+          g = a.hasClass("alert-" + s.settings.type);return l && d && g && (e = !0), !e;
+    }), e;
+  }function e(e, n, a) {
+    var o = { content: { message: "object" == (typeof n === "undefined" ? "undefined" : _typeof(n)) ? n.message : n, title: n.title ? n.title : "", icon: n.icon ? n.icon : "", url: n.url ? n.url : "#", target: n.target ? n.target : "-" } };a = t.extend(!0, {}, o, a), this.settings = t.extend(!0, {}, i, a), this._defaults = i, "-" === this.settings.content.target && (this.settings.content.target = this.settings.url_target), this.animations = { start: "webkitAnimationStart oanimationstart MSAnimationStart animationstart", end: "webkitAnimationEnd oanimationend MSAnimationEnd animationend" }, "number" == typeof this.settings.offset && (this.settings.offset = { x: this.settings.offset, y: this.settings.offset }), (this.settings.allow_duplicates || !this.settings.allow_duplicates && !s(this)) && this.init();
+  }var i = { element: "body", position: null, type: "info", allow_dismiss: !0, allow_duplicates: !0, newest_on_top: !1, showProgressbar: !1, placement: { from: "top", align: "right" }, offset: 20, spacing: 10, z_index: 1031, delay: 5e3, timer: 1e3, url_target: "_blank", mouse_over: null, animate: { enter: "animated fadeInDown", exit: "animated fadeOutUp" }, onShow: null, onShown: null, onClose: null, onClosed: null, icon_type: "class", template: '<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button><span data-notify="icon"></span> <span data-notify="title">{1}</span> <span data-notify="message">{2}</span><div class="progress" data-notify="progressbar"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div></div><a href="{3}" target="{4}" data-notify="url"></a></div>' };String.format = function () {
+    for (var t = arguments[0], s = 1; s < arguments.length; s++) {
+      t = t.replace(RegExp("\\{" + (s - 1) + "\\}", "gm"), arguments[s]);
+    }return t;
+  }, t.extend(e.prototype, { init: function init() {
+      var t = this;this.buildNotify(), this.settings.content.icon && this.setIcon(), "#" != this.settings.content.url && this.styleURL(), this.styleDismiss(), this.placement(), this.bind(), this.notify = { $ele: this.$ele, update: function update(s, e) {
+          var i = {};"string" == typeof s ? i[s] = e : i = s;for (var n in i) {
+            switch (n) {case "type":
+                this.$ele.removeClass("alert-" + t.settings.type), this.$ele.find('[data-notify="progressbar"] > .progress-bar').removeClass("progress-bar-" + t.settings.type), t.settings.type = i[n], this.$ele.addClass("alert-" + i[n]).find('[data-notify="progressbar"] > .progress-bar').addClass("progress-bar-" + i[n]);break;case "icon":
+                var a = this.$ele.find('[data-notify="icon"]');"class" === t.settings.icon_type.toLowerCase() ? a.removeClass(t.settings.content.icon).addClass(i[n]) : (a.is("img") || a.find("img"), a.attr("src", i[n]));break;case "progress":
+                var o = t.settings.delay - t.settings.delay * (i[n] / 100);this.$ele.data("notify-delay", o), this.$ele.find('[data-notify="progressbar"] > div').attr("aria-valuenow", i[n]).css("width", i[n] + "%");break;case "url":
+                this.$ele.find('[data-notify="url"]').attr("href", i[n]);break;case "target":
+                this.$ele.find('[data-notify="url"]').attr("target", i[n]);break;default:
+                this.$ele.find('[data-notify="' + n + '"]').html(i[n]);}
+          }var r = this.$ele.outerHeight() + parseInt(t.settings.spacing) + parseInt(t.settings.offset.y);t.reposition(r);
+        }, close: function close() {
+          t.close();
+        } };
+    }, buildNotify: function buildNotify() {
+      var s = this.settings.content;this.$ele = t(String.format(this.settings.template, this.settings.type, s.title, s.message, s.url, s.target)), this.$ele.attr("data-notify-position", this.settings.placement.from + "-" + this.settings.placement.align), this.settings.allow_dismiss || this.$ele.find('[data-notify="dismiss"]').css("display", "none"), (this.settings.delay <= 0 && !this.settings.showProgressbar || !this.settings.showProgressbar) && this.$ele.find('[data-notify="progressbar"]').remove();
+    }, setIcon: function setIcon() {
+      "class" === this.settings.icon_type.toLowerCase() ? this.$ele.find('[data-notify="icon"]').addClass(this.settings.content.icon) : this.$ele.find('[data-notify="icon"]').is("img") ? this.$ele.find('[data-notify="icon"]').attr("src", this.settings.content.icon) : this.$ele.find('[data-notify="icon"]').append('<img src="' + this.settings.content.icon + '" alt="Notify Icon" />');
+    }, styleDismiss: function styleDismiss() {
+      this.$ele.find('[data-notify="dismiss"]').css({ position: "absolute", right: "10px", top: "5px", zIndex: this.settings.z_index + 2 });
+    }, styleURL: function styleURL() {
+      this.$ele.find('[data-notify="url"]').css({ backgroundImage: "url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)", height: "100%", left: 0, position: "absolute", top: 0, width: "100%", zIndex: this.settings.z_index + 1 });
+    }, placement: function placement() {
+      var s = this,
+          e = this.settings.offset.y,
+          i = { display: "inline-block", margin: "0px auto", position: this.settings.position ? this.settings.position : "body" === this.settings.element ? "fixed" : "absolute", transition: "all .5s ease-in-out", zIndex: this.settings.z_index },
+          n = !1,
+          a = this.settings;switch (t('[data-notify-position="' + this.settings.placement.from + "-" + this.settings.placement.align + '"]:not([data-closing="true"])').each(function () {
+        e = Math.max(e, parseInt(t(this).css(a.placement.from)) + parseInt(t(this).outerHeight()) + parseInt(a.spacing));
+      }), this.settings.newest_on_top === !0 && (e = this.settings.offset.y), i[this.settings.placement.from] = e + "px", this.settings.placement.align) {case "left":case "right":
+          i[this.settings.placement.align] = this.settings.offset.x + "px";break;case "center":
+          i.left = 0, i.right = 0;}this.$ele.css(i).addClass(this.settings.animate.enter), t.each(Array("webkit-", "moz-", "o-", "ms-", ""), function (t, e) {
+        s.$ele[0].style[e + "AnimationIterationCount"] = 1;
+      }), t(this.settings.element).append(this.$ele), this.settings.newest_on_top === !0 && (e = parseInt(e) + parseInt(this.settings.spacing) + this.$ele.outerHeight(), this.reposition(e)), t.isFunction(s.settings.onShow) && s.settings.onShow.call(this.$ele), this.$ele.one(this.animations.start, function () {
+        n = !0;
+      }).one(this.animations.end, function () {
+        s.$ele.removeClass(s.settings.animate.enter), t.isFunction(s.settings.onShown) && s.settings.onShown.call(this);
+      }), setTimeout(function () {
+        n || t.isFunction(s.settings.onShown) && s.settings.onShown.call(this);
+      }, 600);
+    }, bind: function bind() {
+      var s = this;if (this.$ele.find('[data-notify="dismiss"]').on("click", function () {
+        s.close();
+      }), this.$ele.mouseover(function () {
+        t(this).data("data-hover", "true");
+      }).mouseout(function () {
+        t(this).data("data-hover", "false");
+      }), this.$ele.data("data-hover", "false"), this.settings.delay > 0) {
+        s.$ele.data("notify-delay", s.settings.delay);var e = setInterval(function () {
+          var t = parseInt(s.$ele.data("notify-delay")) - s.settings.timer;if ("false" === s.$ele.data("data-hover") && "pause" === s.settings.mouse_over || "pause" != s.settings.mouse_over) {
+            var i = (s.settings.delay - t) / s.settings.delay * 100;s.$ele.data("notify-delay", t), s.$ele.find('[data-notify="progressbar"] > div').attr("aria-valuenow", i).css("width", i + "%");
+          }t <= -s.settings.timer && (clearInterval(e), s.close());
+        }, s.settings.timer);
+      }
+    }, close: function close() {
+      var s = this,
+          e = parseInt(this.$ele.css(this.settings.placement.from)),
+          i = !1;this.$ele.attr("data-closing", "true").addClass(this.settings.animate.exit), s.reposition(e), t.isFunction(s.settings.onClose) && s.settings.onClose.call(this.$ele), this.$ele.one(this.animations.start, function () {
+        i = !0;
+      }).one(this.animations.end, function () {
+        t(this).remove(), t.isFunction(s.settings.onClosed) && s.settings.onClosed.call(this);
+      }), setTimeout(function () {
+        i || (s.$ele.remove(), s.settings.onClosed && s.settings.onClosed(s.$ele));
+      }, 600);
+    }, reposition: function reposition(s) {
+      var e = this,
+          i = '[data-notify-position="' + this.settings.placement.from + "-" + this.settings.placement.align + '"]:not([data-closing="true"])',
+          n = this.$ele.nextAll(i);this.settings.newest_on_top === !0 && (n = this.$ele.prevAll(i)), n.each(function () {
+        t(this).css(e.settings.placement.from, s), s = parseInt(s) + parseInt(e.settings.spacing) + t(this).outerHeight();
+      });
+    } }), t.notify = function (t, s) {
+    var i = new e(this, t, s);return i.notify;
+  }, t.notifyDefaults = function (s) {
+    return i = t.extend(!0, {}, i, s);
+  }, t.notifyClose = function (s) {
+    "warning" === s && (s = "danger"), "undefined" == typeof s || "all" === s ? t("[data-notify]").find('[data-notify="dismiss"]').trigger("click") : "success" === s || "info" === s || "warning" === s || "danger" === s ? t(".alert-" + s + "[data-notify]").find('[data-notify="dismiss"]').trigger("click") : s ? t(s + "[data-notify]").find('[data-notify="dismiss"]').trigger("click") : t('[data-notify-position="' + s + '"]').find('[data-notify="dismiss"]').trigger("click");
+  }, t.notifyCloseExcept = function (s) {
+    "warning" === s && (s = "danger"), "success" === s || "info" === s || "warning" === s || "danger" === s ? t("[data-notify]").not(".alert-" + s).find('[data-notify="dismiss"]').trigger("click") : t("[data-notify]").not(s).find('[data-notify="dismiss"]').trigger("click");
+  };
+});
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -13178,7 +13302,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {
@@ -13228,9 +13352,29 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             });
 
             if (elem.hasClass("editable")) {
-                $(".part").draggable({ axis: "x" });
+                $(".part").draggable({ axis: "x", containment: "parent" });
+                var cue_dialog = $("#edit_cue_dialog");
+                $(".add_cue").click(function () {
+                    cue_dialog.modal();
+                });
+
+                $("#edit_cue_dialog .btn-primary").click(function () {
+                    cue_dialog.modal("hide");
+                    cue = $("<div class='part'/>");
+                    perc = song.currentTime / song.duration;
+                    cue.css("left", perc * 100 + "%");
+                    cue_name = $("select", cue_dialog).val();
+                    cue.html("<div class='cue'></div> <span>" + $("select option:selected", cue_dialog).html() + "</span>");
+                    $(".parts_container", elem).prepend(cue);
+                    input = $("<input type='hidden' id='cue_' name='" + cue_name + "[]' value='" + perc + "' />");
+                    $(".cue_container").append(input);
+                    $(".part").draggable({ axis: "x", containment: "parent", stop: function stop() {
+                            syncCues();
+                        } });
+                });
             }
         });
+        function syncCues() {}
 
         function maketime(mtime) {
 
@@ -13245,7 +13389,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/*!
@@ -15629,7 +15773,7 @@ if (typeof jQuery === 'undefined') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15677,7 +15821,7 @@ return $.extend( $.expr[ ":" ], {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
@@ -15701,7 +15845,7 @@ return $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
@@ -15754,7 +15898,7 @@ return $.ui.plugin = {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
@@ -15803,7 +15947,7 @@ return $.ui.safeActiveElement = function( document ) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
@@ -15833,7 +15977,7 @@ return $.ui.safeBlur = function( element ) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15887,7 +16031,7 @@ return $.fn.scrollParent = function( includeHidden ) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15912,12 +16056,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
-			__webpack_require__(42),
-			__webpack_require__(35),
-			__webpack_require__(37),
+			__webpack_require__(43),
+			__webpack_require__(36),
 			__webpack_require__(38),
 			__webpack_require__(39),
 			__webpack_require__(40),
+			__webpack_require__(41),
 			__webpack_require__(2),
 			__webpack_require__(4)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
@@ -17146,7 +17290,7 @@ return $.ui.draggable;
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -17169,7 +17313,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
-			__webpack_require__(36),
+			__webpack_require__(37),
 			__webpack_require__(2),
 			__webpack_require__(4)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
@@ -17381,7 +17525,7 @@ return $.widget( "ui.mouse", {
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -34470,10 +34614,10 @@ return $.widget( "ui.mouse", {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(44), __webpack_require__(45)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(45), __webpack_require__(46)(module)))
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports) {
 
 var g;
@@ -34500,7 +34644,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -34528,7 +34672,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);

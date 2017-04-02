@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -11,6 +10,8 @@ require('jquery-ui');
 require('jquery-ui/ui/widgets/draggable');
 
 require('./components/jquery.form.min');
+require('./components/bootstrap-notify.min');
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -20,28 +21,46 @@ require('./components/jquery.form.min');
 
 $(document).ready(function () {
     $(".player").btplayer();
-   $(".track-form").ajaxForm(
-       {
-           uploadProgress: function(event, pos, total, percentComplete) {
-               $(".track-form .progress").show();
-               $(".track-form .progress .progress-bar").css("width", percentComplete+"%");
-               $(".track-form .progress .progress-bar .sr-only").html(percentComplete+"%")
-           },
-           beforeSubmit: function ($form) {
-               $(".alert", $form).hide();
-               $(".button", $form).attr("disabled", "disabled");
-           },
-           dataType: "json",
-           success: function (json, statusText, xhr, $form) {
-               console.info($form);
-               $(".button", $form).removeAttr("disabled", "disabled");
-               if (json.success) {
-                    location.href = "/cabinet/song/edit/"+json.id;
-                   $(".alert-success", $form).html(json.message).show();
-               } else {
-                   $(".alert-danger", $form).html(json.message).show();
-               }
-           }
-       }
-   );
+    $(".edit_track_form").ajaxForm({
+            dataType: "json",
+            success: function (json, statusText, xhr, $form) {
+                if(json.success) {
+                    $.notify({
+                        message: json.message
+                    });
+                } else {
+                    $.notify({
+                        message: json.message
+                    }, {
+                        type: 'danger'
+                    });
+                }
+
+            }
+        }
+    );
+    $(".track-form").ajaxForm(
+        {
+            uploadProgress: function (event, pos, total, percentComplete) {
+                $(".track-form .progress").show();
+                $(".track-form .progress .progress-bar").css("width", percentComplete + "%");
+                $(".track-form .progress .progress-bar .sr-only").html(percentComplete + "%")
+            },
+            beforeSubmit: function ($form) {
+                $(".alert", $form).hide();
+                $(".button", $form).attr("disabled", "disabled");
+            },
+            dataType: "json",
+            success: function (json, statusText, xhr, $form) {
+                console.info($form);
+                $(".button", $form).removeAttr("disabled", "disabled");
+                if (json.success) {
+                    location.href = "/cabinet/song/edit/" + json.id;
+                    $(".alert-success", $form).html(json.message).show();
+                } else {
+                    $(".alert-danger", $form).html(json.message).show();
+                }
+            }
+        }
+    );
 });

@@ -15,6 +15,16 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Track extends Model
 {
+    const CUES = [
+        "intro" => "Intro",
+        "bridge" => "Bridge",
+        "verse" => "Verse",
+        "pre-chorus" => "Pre-Chorus",
+        "chorus" => "Chorus",
+        "pre-solo" => "Pre-Solo",
+        "solo" => "Solo",
+        "outro" => "Outro",
+    ];
     protected static $folder = "tracks";
     protected $fillable = [
         'status', 'user_id', 'song_id', 'bass', 'drums', 'vocals', 'lead', 'rhythm', 'keys', 'name'
@@ -38,5 +48,12 @@ class Track extends Model
     public function song()
     {
         return $this->belongsTo('App\Song');
+    }
+
+
+    public function getCues() {
+        if(!$this->properties) return [];
+        $props = json_decode($this->properties);
+        return $props->cues ?? [];
     }
 }
