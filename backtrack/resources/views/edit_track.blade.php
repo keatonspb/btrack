@@ -16,7 +16,9 @@
                         {{ csrf_field() }}
                         <input name="id" type="hidden" value="{{$track->id}}" />
                         <div class="cue_container">
-
+                            @foreach($track->getCues() as $cue)
+                                <input id="cue_{{$loop->index}}" name="{{$cue->name}}[]" value="{{$cue->perc}}" type="hidden" />
+                            @endforeach
                         </div>
                         <div class="checkbox-inline "><label><input class="edit_instrument" data-id="{{$track->id}}" type="checkbox"  name="bass" value="1" @if($track->bass) checked @endif> bass</label></div>
                         <div class="checkbox-inline"><label><input class="edit_instrument" data-id="{{$track->id}}" type="checkbox" name="drums" value="1" @if($track->drums) checked @endif> drums</label></div>

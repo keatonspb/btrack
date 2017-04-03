@@ -13352,29 +13352,57 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             });
 
             if (elem.hasClass("editable")) {
-                $(".part").draggable({ axis: "x", containment: "parent" });
+                $(".part", elem).draggable({ axis: "x", containment: "parent", stop: function stop() {
+                        syncCue(this);
+                    } });
                 var cue_dialog = $("#edit_cue_dialog");
-                $(".add_cue").click(function () {
+                $(".add_cue", elem).click(function () {
                     cue_dialog.modal();
+                });
+
+                $(".del_cue", elem).click(function () {
+                    if ($(this).hasClass("selected")) {
+                        $(this).removeClass("selected");
+                        $(".part", elem).removeClass("deletable");
+                    } else {
+                        $(this).addClass("selected");
+                        $(".part", elem).addClass("deletable");
+                    }
+                });
+
+                $(".parts_container").on("click", ".deletable", function () {
+
+                    var id = $(this).data("for");
+                    $("#" + id).remove();
+                    $(this).remove();
                 });
 
                 $("#edit_cue_dialog .btn-primary").click(function () {
                     cue_dialog.modal("hide");
                     cue = $("<div class='part'/>");
+                    cid = "cue_" + new Date().getTime() / 1000;
+                    cue.data("data-for", cid);
                     perc = song.currentTime / song.duration * 100;
                     cue.css("left", perc + "%");
                     cue_name = $("select", cue_dialog).val();
                     cue.html("<div class='cue'></div> <span>" + $("select option:selected", cue_dialog).html() + "</span>");
                     $(".parts_container", elem).prepend(cue);
-                    input = $("<input type='hidden' id='cue_' name='" + cue_name + "[]' value='" + perc + "' />");
+                    input = $("<input type='hidden' id='" + cid + "' name='" + cue_name + "[]' value='" + perc + "' />");
                     $(".cue_container").append(input);
                     $(".part").draggable({ axis: "x", containment: "parent", stop: function stop() {
-                            syncCues();
+                            syncCue(this);
                         } });
                 });
             }
         });
-        function syncCues() {}
+        function syncCue(el) {
+            console.info("syncCue", el);
+            var id = $(el).data("for");
+            var parent = $(el).parent();
+            perc = $(el).position().left / parent.width() * 100;
+            console.info(perc);
+            $("#" + id).val(perc);
+        }
 
         function maketime(mtime) {
 

@@ -3,7 +3,7 @@
     <div class="timeline">
         <div class="parts_container">
             @foreach($track->getCues() as $cue)
-                <div class="part" style="left: {{$cue->perc}}%">
+                <div class="part" style="left: {{$cue->perc}}%" data-for="cue_{{$loop->index}}">
                     <div class="cue"></div>
                     <span>{{$cue->name}}</span></div>
             @endforeach
@@ -21,7 +21,7 @@
             @if($class == 'editable')
                 <button title="Add cue" class="add_cue"><i class="text-primary fa fa-plus" aria-hidden="true"></i>
                 </button>
-                <button title="Remove cue" class="del_cue"><i class="text-primary fa fa-minus" aria-hidden="true"></i>
+                <button title="Remove cue" class="del_cue"><i class="text-danger fa fa-minus" aria-hidden="true"></i>
                 </button>
             @endif
         </div>

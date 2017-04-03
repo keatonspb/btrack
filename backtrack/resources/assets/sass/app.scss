@@ -71,7 +71,16 @@ $player-part-height: 20px;
 .player {
   &.editable {
     .part {
+      &.deletable {
+        color: $brand-danger;
+        cursor: pointer;
+      }
       cursor: w-resize;
+    }
+    .del_cue {
+      &.selected {
+        border: 1px solid $brand-danger;
+      }
     }
   }
   .controls {
