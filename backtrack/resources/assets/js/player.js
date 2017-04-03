@@ -17,6 +17,8 @@
             var curTime = $(".time .cur", elem);
             var allTime = $(".time .all", elem);
             var loaded = false;
+            var cues = [];
+            var nextCue = 0;
             song.addEventListener("loadedmetadata", function () {
                 allTime.html(maketime(song.duration));
             });
@@ -32,8 +34,6 @@
                 posx =  ev.pageX - $(this).offset().left;
                 perc = posx/$(this).width();
                 song.currentTime = song.duration * perc;
-
-
             });
             play.click(function () {
                 allTime.html(maketime(song.duration));
@@ -44,6 +44,24 @@
                     song.pause();
                     $(".fa",this).removeClass("fa-pause").addClass("fa-play");
                 }
+            });
+            next.click(function () {
+                song.pause();
+                console.info(song.duration);
+                perc = song.currentTime/song.duration*100;
+                var fouded_cue = perc;
+                console.info(fouded_cue);
+                $(".part", elem).each(function () {
+                    var parent = $(this).parent();
+                    pos = $(this).position().left/parent.width()*100;
+                    if((pos > perc && pos <= fouded_cue) || fouded_cue == 0 ) {
+                        fouded_cue = pos;
+                    }
+                    console.info(fouded_cue);
+                });
+                song.currentTime = song.duration * (fouded_cue/100);
+
+                song.play();
             });
 
             if(elem.hasClass("editable")) {
@@ -67,7 +85,6 @@
                 });
 
                 $(".parts_container").on("click", ".deletable", function() {
-
                     var id = $(this).data("for");
                     $("#"+id).remove();
                     $(this).remove();
@@ -93,6 +110,17 @@
 
 
         });
+
+        function collectCues(elem) {
+            var cues = [];
+            console.info($(".part", elem));
+            $(".part", elem).each(function () {
+                var parent = $(this).parent();
+                cues.push($(this).position().left/parent.width()*100);
+            });
+            return cues;
+        }
+
         function syncCue(el) {
             console.info("syncCue",el)
             var id = $(el).data("for");
@@ -103,9 +131,7 @@
         }
 
         function maketime(mtime) {
-
             mtime = Math.round(mtime);
-            console.info(mtime);
             minutes = Math.floor(mtime/60);
             second =mtime%60;
             return (minutes < 10 ? "0"+minutes.toString() : minutes)+":"+(second < 10 ? "0"+second.toString() : second);
