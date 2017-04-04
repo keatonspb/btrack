@@ -28,6 +28,14 @@
 }
 
 $instrument_icon_height: 24px;
+a:hover {
+     .instruments {
+       li {
+         text-decoration: none !important;
+       }
+
+     }
+}
 .instruments {
   padding: 0;
   margin: 0;

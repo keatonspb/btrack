@@ -43,20 +43,25 @@ class HomeController extends Controller
     ]);
     }
 
-    public function song($id, Request $request) {
+    public function song($id, $track_id = null, Request $request) {
         $song = Song::find($id);
         if(!$song) {
             abort(404);
         }
-        $track = $song->tracks->first();
-        $alttracks = $song->tracks->where("id", "!=", $track->id);
+        if($track_id) {
+            $track = Track::find($track_id);
+        } else {
+            $track = $song->tracks->first();
+        }
+
+
 
         return view('view', [
             "song" => $song,
             "author" => $song->author,
             "track" => $track,
-            "file" => $track->getFilePath(),
-            "alttracks" => $alttracks
+            "alttracks" => $track->getAlternativeTracks(),
+
         ]);
     }
 }

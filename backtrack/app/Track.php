@@ -41,6 +41,10 @@ class Track extends Model
     public function getFilePath() {
         return Storage::disk("s3")->url(self::$folder."/".$this->filename);
     }
+
+    public function getAlternativeTracks() {
+        return Track::where("song_id", $this->song_id)->where("id", "!=", $this->id)->get();
+    }
     public function author()
     {
         return $this->belongsTo('App\Author');
