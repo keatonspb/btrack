@@ -8,6 +8,7 @@
             </div>
             <form method="post" class="ajax-form dialog-form" action="/cabinet/tabs/save">
                 <input type="hidden" name="id" />
+                <input type="hidden" name="song_id" value="{{$song->id}}" />
             <div class="modal-body">
                 <div class="alert" style="display: none"></div>
                 <div class="row">

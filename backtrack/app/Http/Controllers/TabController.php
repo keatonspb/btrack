@@ -17,14 +17,9 @@ class TabController extends Controller
                 "tuning_id" => $request->get("tuning_id"),
                 "content" => $request->get("content"),
             ];
-            if($request->get("id")) {
-                $Track = Track::find("id");
-                $Track-update($row);
-            } else {
-                $Track = Track::create($row);
-            }
+            Tab::updateOrCreate($row);
         } catch (\Exception $e) {
-            $e->getMessage($e->getMessage());
+            $json['message'] = $e->getMessage();
             $json['success'] = false;
         }
         return json_encode($json);

@@ -13,4 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tab extends Model
 {
+    protected $fillable = [
+        'song_id', 'instrument', 'tuning_id', 'content'
+    ];
 }

@@ -24,4 +24,4 @@ Route::post('/cabinet/track/save', 'CabinetController@saveTrack');
 Route::get('/song/{id}', 'HomeController@song');
 Route::get('/song/{id}/{track_id}', 'HomeController@song');
 Route::post('/cabinet/tabs/save', 'TabsController@save');
-Route::get('/cabinet/tabs/{tab}/delete', 'TabsController@delete');
+Route::get('/cabinet/tabs/{tab}/delete', 'TabController@delete');
