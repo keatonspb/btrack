@@ -39,6 +39,29 @@ $(document).ready(function () {
             }
         }
     );
+    $(".ajax-form").ajaxForm(
+        {
+            beforeSubmit: function ($form) {
+                $(".alert", $form).hide();
+                $(".button", $form).attr("disabled", "disabled");
+            },
+            dataType: "json",
+            success: function (json, statusText, xhr, $form) {
+                $(".button", $form).removeAttr("disabled", "disabled");
+                if(json.success) {
+                    $.notify({
+                        message: json.message
+                    });
+                } else {
+                    $.notify({
+                        message: json.message
+                    }, {
+                        type: 'danger'
+                    });
+                }
+            }
+        }
+    );
     $(".track-form").ajaxForm(
         {
             uploadProgress: function (event, pos, total, percentComplete) {

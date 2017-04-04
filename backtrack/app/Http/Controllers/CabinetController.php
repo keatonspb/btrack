@@ -110,6 +110,9 @@ class CabinetController extends Controller
             $song = Song::find($request->get("id"));
             $song->name = $request->get("name");
             $song->author_id = $author->id;
+            if($request->get("tabs")) {
+
+            }
             $song->save();
             $json['id'] = $song->id;
             DB::commit();

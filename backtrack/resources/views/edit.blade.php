@@ -23,13 +23,25 @@
                         @endforeach
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Tabs</div>
+                    <form action="/cabinet/song/save" class="ajax-form">
+                    <div class="panel-body">
+                        <input type="hidden" name="id" value="{{$song->id}}">
+                        <textarea class="form-control" name="tabs"></textarea>
+                    </div>
+                        <div class="panel-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">Song info</div>
+                    <form method="post" action="/cabinet/song/save" class="ajax-form"
+                          enctype="multipart/form-data">
                     <div class="panel-body">
-                        <form method="post" action="/cabinet/song/save" class="track-form"
-                              enctype="multipart/form-data">
                             <input type="hidden" name="id" value="{{$song->id}}">
                             <div class="alert alert-danger" style="display: none"></div>
                             <div class="alert alert-success" style="display: none"></div>
@@ -43,12 +55,12 @@
                                 <input class="form-control" name="author" value="{{$author->name}}" required/>
                             </div>
 
-
-                            <div>
-                                <button type="submit" class="btn btn-primary">Сохранить</button>
-                            </div>
-                        </form>
                     </div>
+                    <div class="panel-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>

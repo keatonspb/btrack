@@ -11994,6 +11994,27 @@ $(document).ready(function () {
             }
         }
     });
+    $(".ajax-form").ajaxForm({
+        beforeSubmit: function beforeSubmit($form) {
+            $(".alert", $form).hide();
+            $(".button", $form).attr("disabled", "disabled");
+        },
+        dataType: "json",
+        success: function success(json, statusText, xhr, $form) {
+            $(".button", $form).removeAttr("disabled", "disabled");
+            if (json.success) {
+                $.notify({
+                    message: json.message
+                });
+            } else {
+                $.notify({
+                    message: json.message
+                }, {
+                    type: 'danger'
+                });
+            }
+        }
+    });
     $(".track-form").ajaxForm({
         uploadProgress: function uploadProgress(event, pos, total, percentComplete) {
             $(".track-form .progress").show();

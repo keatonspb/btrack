@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2017-03-30.
+    * Generated on 2017-04-04.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -28,6 +28,7 @@ namespace PHPSTORM_META {
             'db' instanceof \Illuminate\Database\DatabaseManager,
             'db.connection' instanceof \Illuminate\Database\MySqlConnection,
             'Illuminate\Contracts\Queue\EntityResolver' instanceof \Illuminate\Database\Eloquent\QueueEntityResolver,
+            'encrypter' instanceof \Illuminate\Encryption\Encrypter,
             'files' instanceof \Illuminate\Filesystem\Filesystem,
             'filesystem' instanceof \Illuminate\Filesystem\FilesystemManager,
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
@@ -48,7 +49,7 @@ namespace PHPSTORM_META {
             'cache.store' instanceof \Illuminate\Cache\Repository,
             'memcached.connector' instanceof \Illuminate\Cache\MemcachedConnector,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\NullBroadcaster,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\LogBroadcaster,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,
             'command.cache.clear' instanceof \Illuminate\Cache\Console\ClearCommand,
             'command.cache.forget' instanceof \Illuminate\Cache\Console\ForgetCommand,
@@ -149,6 +150,7 @@ namespace PHPSTORM_META {
             'db' instanceof \Illuminate\Database\DatabaseManager,
             'db.connection' instanceof \Illuminate\Database\MySqlConnection,
             'Illuminate\Contracts\Queue\EntityResolver' instanceof \Illuminate\Database\Eloquent\QueueEntityResolver,
+            'encrypter' instanceof \Illuminate\Encryption\Encrypter,
             'files' instanceof \Illuminate\Filesystem\Filesystem,
             'filesystem' instanceof \Illuminate\Filesystem\FilesystemManager,
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
@@ -169,7 +171,7 @@ namespace PHPSTORM_META {
             'cache.store' instanceof \Illuminate\Cache\Repository,
             'memcached.connector' instanceof \Illuminate\Cache\MemcachedConnector,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\NullBroadcaster,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\LogBroadcaster,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,
             'command.cache.clear' instanceof \Illuminate\Cache\Console\ClearCommand,
             'command.cache.forget' instanceof \Illuminate\Cache\Console\ForgetCommand,
@@ -270,6 +272,7 @@ namespace PHPSTORM_META {
             'db' instanceof \Illuminate\Database\DatabaseManager,
             'db.connection' instanceof \Illuminate\Database\MySqlConnection,
             'Illuminate\Contracts\Queue\EntityResolver' instanceof \Illuminate\Database\Eloquent\QueueEntityResolver,
+            'encrypter' instanceof \Illuminate\Encryption\Encrypter,
             'files' instanceof \Illuminate\Filesystem\Filesystem,
             'filesystem' instanceof \Illuminate\Filesystem\FilesystemManager,
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
@@ -290,7 +293,7 @@ namespace PHPSTORM_META {
             'cache.store' instanceof \Illuminate\Cache\Repository,
             'memcached.connector' instanceof \Illuminate\Cache\MemcachedConnector,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\NullBroadcaster,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\LogBroadcaster,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,
             'command.cache.clear' instanceof \Illuminate\Cache\Console\ClearCommand,
             'command.cache.forget' instanceof \Illuminate\Cache\Console\ForgetCommand,
@@ -391,6 +394,7 @@ namespace PHPSTORM_META {
             'db' instanceof \Illuminate\Database\DatabaseManager,
             'db.connection' instanceof \Illuminate\Database\MySqlConnection,
             'Illuminate\Contracts\Queue\EntityResolver' instanceof \Illuminate\Database\Eloquent\QueueEntityResolver,
+            'encrypter' instanceof \Illuminate\Encryption\Encrypter,
             'files' instanceof \Illuminate\Filesystem\Filesystem,
             'filesystem' instanceof \Illuminate\Filesystem\FilesystemManager,
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
@@ -411,7 +415,7 @@ namespace PHPSTORM_META {
             'cache.store' instanceof \Illuminate\Cache\Repository,
             'memcached.connector' instanceof \Illuminate\Cache\MemcachedConnector,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\NullBroadcaster,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\LogBroadcaster,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,
             'command.cache.clear' instanceof \Illuminate\Cache\Console\ClearCommand,
             'command.cache.forget' instanceof \Illuminate\Cache\Console\ForgetCommand,
