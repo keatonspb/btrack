@@ -13326,6 +13326,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             var loaded = false;
             var cues = [];
             var nextCue = 0;
+
             song.addEventListener("loadedmetadata", function () {
                 allTime.html(maketime(song.duration));
             });
@@ -13353,22 +13354,36 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }
             });
             next.click(function () {
-                song.pause();
-                console.info(song.duration);
                 perc = song.currentTime / song.duration * 100;
                 var fouded_cue = perc;
-                console.info(fouded_cue);
-                $(".part", elem).each(function () {
-                    var parent = $(this).parent();
-                    pos = $(this).position().left / parent.width() * 100;
-                    if (pos > perc && pos <= fouded_cue || fouded_cue == 0) {
-                        fouded_cue = pos;
+                cues = collectCues(elem);
+                for (var i = 0; i <= cues.length; i++) {
+                    if (cues[i] >= perc) {
+                        fouded_cue = cues[i];
+                        break;
                     }
-                    console.info(fouded_cue);
-                });
+                }
                 song.currentTime = song.duration * (fouded_cue / 100);
+            });
 
-                song.play();
+            prev.click(function () {
+                perc = song.currentTime / song.duration * 100;
+                var fouded_cue = perc;
+                cues = collectCues(elem);
+                console.info(cues, perc);
+                for (var i = cues.length - 1; i > 0; i--) {
+                    console.info(cues[i]);
+                    if (cues[i] <= perc) {
+                        fouded_cue = cues[i];
+                        break;
+                    }
+                }
+                song.currentTime = song.duration * (fouded_cue / 100);
+            });
+
+            $(".part", elem).click(function () {
+                perc = $(this).position().left / $(this).parent().width();
+                song.currentTime = song.duration * perc;
             });
 
             if (elem.hasClass("editable")) {
@@ -13417,10 +13432,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
         function collectCues(elem) {
             var cues = [];
-            console.info($(".part", elem));
             $(".part", elem).each(function () {
                 var parent = $(this).parent();
                 cues.push($(this).position().left / parent.width() * 100);
+            });
+            cues = cues.sort(function (a, b) {
+                return a - b;
             });
             return cues;
         }
