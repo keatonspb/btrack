@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 47);
+/******/ 	return __webpack_require__(__webpack_require__.s = 48);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -11963,9 +11963,9 @@ process.umask = function() { return 0; };
  */
 
 __webpack_require__(31);
-__webpack_require__(34);
+__webpack_require__(35);
 __webpack_require__(4);
-__webpack_require__(42);
+__webpack_require__(43);
 
 __webpack_require__(33);
 __webpack_require__(32);
@@ -12002,13 +12002,34 @@ $(document).ready(function () {
         dataType: "json",
         success: function success(json, statusText, xhr, $form) {
             $(".button", $form).removeAttr("disabled", "disabled");
+
             if (json.success) {
-                $.notify({
-                    message: json.message
-                });
+                if ($(".alert", $form).length) {
+                    $(".alert", $form).removeClass("alert-danger").addClass("alert-success").html(json.message).show();
+                } else {
+                    $.notify({
+                        message: json.message
+                    });
+                }
+            } else {
+                if ($(".alert", $form).length) {
+                    $(".alert", $form).removeClass("alert-success").addClass("alert-danger").html(json.message).show();
+                } else {
+                    $.notify({
+                        message: json.message
+                    }, {
+                        type: 'danger'
+                    });
+                }
+            }
+        },
+        error: function error(json, statusText, xhr, $form) {
+
+            if ($(".alert", $form).length) {
+                $(".alert", $form).removeClass("alert-success").addClass("alert-danger").html("Error on form submit").show();
             } else {
                 $.notify({
-                    message: json.message
+                    message: "Error on form submit"
                 }, {
                     type: 'danger'
                 });
@@ -12037,6 +12058,7 @@ $(document).ready(function () {
             }
         }
     });
+    __webpack_require__(34);
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
@@ -12892,7 +12914,7 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(44);
+window._ = __webpack_require__(45);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -12902,7 +12924,7 @@ window._ = __webpack_require__(44);
 
 window.$ = window.jQuery = __webpack_require__(0);
 
-__webpack_require__(35);
+__webpack_require__(36);
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -13326,6 +13348,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/* WEBPACK VAR INJECTION */(function($) {/**
+ * Created by default on 04.04.2017.
+ */
+$(".open_dialog").click(function () {
+    var $dialog = $($(this).data("dialog"));
+    if ($dialog.length) {
+        $("input", $dialog).val("");
+        $("textarea", $dialog).text("");
+        $dialog.modal();
+    }
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /* WEBPACK VAR INJECTION */(function(jQuery) {
 (function ($) {
     $.fn.btplayer = function () {
@@ -13483,7 +13522,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/*!
@@ -15867,7 +15906,7 @@ if (typeof jQuery === 'undefined') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15915,7 +15954,7 @@ return $.extend( $.expr[ ":" ], {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
@@ -15939,7 +15978,7 @@ return $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
@@ -15992,7 +16031,7 @@ return $.ui.plugin = {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
@@ -16041,7 +16080,7 @@ return $.ui.safeActiveElement = function( document ) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
@@ -16071,7 +16110,7 @@ return $.ui.safeBlur = function( element ) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -16125,7 +16164,7 @@ return $.fn.scrollParent = function( includeHidden ) {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -16150,12 +16189,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
-			__webpack_require__(43),
-			__webpack_require__(36),
-			__webpack_require__(38),
+			__webpack_require__(44),
+			__webpack_require__(37),
 			__webpack_require__(39),
 			__webpack_require__(40),
 			__webpack_require__(41),
+			__webpack_require__(42),
 			__webpack_require__(2),
 			__webpack_require__(4)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
@@ -17384,7 +17423,7 @@ return $.ui.draggable;
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -17407,7 +17446,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
-			__webpack_require__(37),
+			__webpack_require__(38),
 			__webpack_require__(2),
 			__webpack_require__(4)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
@@ -17619,7 +17658,7 @@ return $.widget( "ui.mouse", {
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -34708,10 +34747,10 @@ return $.widget( "ui.mouse", {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(45), __webpack_require__(46)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(46), __webpack_require__(47)(module)))
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 var g;
@@ -34738,7 +34777,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -34766,7 +34805,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Author;
 use App\Song;
 use App\Track;
+use App\Tuning;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +44,7 @@ class CabinetController extends Controller
             "song" => $song,
             "author" => $song->author,
             "tracks" => $song->tracks,
+            "tunings" => Tuning::all()
 
         ]);
     }
@@ -106,11 +108,22 @@ class CabinetController extends Controller
         ];
         try {
             DB::beginTransaction();
-            $author = Author::getOrCreate($request->get("author"));
             $song = Song::find($request->get("id"));
-            $song->name = $request->get("name");
-            $song->author_id = $author->id;
-            if($request->get("tabs")) {
+            if($request->get("name")) {
+                $song->name = $request->get("name");
+                $author = Author::getOrCreate($request->get("author"));
+                $song->author_id = $author->id;
+            }
+            if($request->get("guitar_tabs")) {
+
+            }
+            if($request->get("bass_tabs")) {
+
+            }
+            if($request->get("lyrics_tabs")) {
+
+            }
+            if($request->get("drum_tabs")) {
 
             }
             $song->save();
@@ -167,5 +180,12 @@ class CabinetController extends Controller
             $json['message'] = $e->getMessage() . " " . $e->getFile() . " " . $e->getLine();
         }
         return response()->json($json);
+    }
+
+    public function getTab() {
+        
+    }
+    public function saveTab() {
+
     }
 }

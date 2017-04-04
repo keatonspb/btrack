@@ -11,7 +11,7 @@
                     </div>
                     <div class="panel-body">
                         @include("frg/player", ['class'=>'editable'])
-                        @include("frg/edit_cue_dialog")
+                        @include("dialogs.edit_cue_dialog")
                     <form action="/cabinet/track/save" class="edit_track_form" method="post">
                         {{ csrf_field() }}
                         <input name="id" type="hidden" value="{{$track->id}}" />

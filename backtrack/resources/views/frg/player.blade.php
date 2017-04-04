@@ -1,7 +1,6 @@
 <div class="player {{$class|""}}">
     <audio src="{{$track->getFilePath()}}"></audio>
     <div class="timeline">
-        @if($track->getCues())
         <div class="parts_container">
             @foreach($track->getCues() as $cue)
                 <div class="part" style="left: {{$cue->perc}}%" data-for="cue_{{$loop->index}}">
@@ -9,7 +8,6 @@
                     <span>{{$cue->name}}</span></div>
             @endforeach
         </div>
-        @endif
         <div class="bar">
             <div class="progress" style="width: 0%;"></div>
             <div class="cursor"></div>

@@ -48,13 +48,36 @@ $(document).ready(function () {
             dataType: "json",
             success: function (json, statusText, xhr, $form) {
                 $(".button", $form).removeAttr("disabled", "disabled");
+
                 if(json.success) {
-                    $.notify({
-                        message: json.message
-                    });
+                    if($(".alert", $form).length) {
+                        $(".alert", $form).removeClass("alert-danger").addClass("alert-success").html(json.message).show();
+                    } else {
+                        $.notify({
+                            message: json.message
+                        });
+                    }
+
+                } else {
+                    if($(".alert", $form).length) {
+                        $(".alert", $form).removeClass("alert-success").addClass("alert-danger").html(json.message).show();
+                    } else {
+                        $.notify({
+                            message: json.message
+                        }, {
+                            type: 'danger'
+                        });
+                    }
+
+                }
+            },
+            error: function (json, statusText, xhr, $form) {
+
+                if($(".alert", $form).length) {
+                    $(".alert", $form).removeClass("alert-success").addClass("alert-danger").html("Error on form submit").show();
                 } else {
                     $.notify({
-                        message: json.message
+                        message: "Error on form submit"
                     }, {
                         type: 'danger'
                     });
@@ -86,4 +109,6 @@ $(document).ready(function () {
             }
         }
     );
+    require('./dialogs');
+
 });
