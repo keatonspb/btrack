@@ -36,7 +36,7 @@
                                 <strong>{{$tab->instrument}}</strong> {{$tab->tuning_name}}
                                 <div class="pull-right">
                                     <button class="btn btn-info btn-xs open_dialog" data-dialog="#edit_tab_dialog" data-get="/cabinet/tabs/get/{{$tab->id}}">edit</button>
-                                    <a class="btn btn-danger btn-xs open_dialog" href="/cabinet/tabs/{{$tab->id}}/delete">delete</a>
+                                    <a class="btn btn-danger btn-xs open_dialog delete-item" href="/cabinet/tabs/{{$tab->id}}/delete">delete</a>
                                 </div>
                             </div>
                         @endforeach

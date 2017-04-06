@@ -115,4 +115,22 @@ $(document).ready(function () {
     );
     require('./dialogs');
 
+    $(".delete-item").click(function () {
+        var resultConfirm = confirm("Are you sure?");
+        if(resultConfirm) {
+            $.getJSON($(this).attr("href"), function (json) {
+                if(json.success) {
+                    location.reload();
+                } else {
+                    $.notify({
+                        message: json.message
+                    }, {
+                        type: 'danger'
+                    });
+                }
+            });
+        }
+        return false;
+    });
+
 });

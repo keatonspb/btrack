@@ -39,7 +39,15 @@ class TabController extends Controller
         }
         return json_encode($json);
     }
-    public function delete(Request $request) {
-
+    public function delete($id, Request $request) {
+        $json = ['success'=>true];
+        try {
+            $tab = Tab::findOrFail($id);
+            $tab->delete();
+        } catch (\Exception $e) {
+            $json['success'] = false;
+            $json['message'] = $e->getMessage();
+        }
+        return json_encode($json);
     }
 }
