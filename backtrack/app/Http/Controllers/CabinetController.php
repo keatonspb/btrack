@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Author;
 use App\Song;
+use App\Tab;
 use App\Track;
 use App\Tuning;
 use Illuminate\Http\Request;
@@ -40,11 +41,13 @@ class CabinetController extends Controller
         if (!$song) {
             abort(404);
         }
+
         return view('edit', [
             "song" => $song,
             "author" => $song->author,
             "tracks" => $song->tracks,
-            "tunings" => Tuning::all()
+            "tunings" => Tuning::all(),
+            "tabs" => $song->tabs()->leftJoin('tunings', 'tunings.id', '=', 'tabs.tuning_id')->select("tabs.*", "tunings.name as tuning_name")->get()
 
         ]);
     }
@@ -182,10 +185,4 @@ class CabinetController extends Controller
         return response()->json($json);
     }
 
-    public function getTab() {
-        
-    }
-    public function saveTab() {
-
-    }
 }

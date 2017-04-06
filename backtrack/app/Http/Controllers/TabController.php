@@ -14,10 +14,13 @@ class TabController extends Controller
             $row = [
                 "song_id" => $request->get("song_id"),
                 "instrument" => $request->get("instrument"),
-                "tuning_id" => $request->get("tuning_id"),
+                "tuning_id" => $request->get("tuning_id") ? $request->get("tuning_id") : null,
                 "content" => $request->get("content"),
             ];
-            Tab::updateOrCreate($row);
+            if($request->get("id")) {
+                $row['id'] = $request->get("id");
+            }
+            Tab::updateOrCreate(['id'=>$row['id']],$row);
         } catch (\Exception $e) {
             $json['message'] = $e->getMessage();
             $json['success'] = false;
@@ -25,6 +28,17 @@ class TabController extends Controller
         return json_encode($json);
     }
 
+    public function get($id, Request $request) {
+        $json = ['success'=>true];
+        try {
+            $tab = Tab::findOrFail($id);
+            $json['data'] = $tab->toArray();
+        } catch (\Exception $e) {
+            $json['success'] = false;
+            $json['message'] = $e->getMessage();
+        }
+        return json_encode($json);
+    }
     public function delete(Request $request) {
 
     }

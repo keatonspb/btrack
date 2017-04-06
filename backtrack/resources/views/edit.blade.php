@@ -24,10 +24,23 @@
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">Tabs<div class="pull-right"><button class="btn btn-primary btn-xs open_dialog" data-dialog="#edit_tab_dialog">Add tab</button></div></div>
-                        <div class="panel-body">
-
+                    <div class="panel-heading">Tabs
+                        <div class="pull-right">
+                            <button class="btn btn-primary btn-xs open_dialog" data-dialog="#edit_tab_dialog">Add tab
+                            </button>
                         </div>
+                    </div>
+                    <div class="list-group">
+                        @foreach($tabs as $tab)
+                            <div class="list-group-item">
+                                <strong>{{$tab->instrument}}</strong> {{$tab->tuning_name}}
+                                <div class="pull-right">
+                                    <button class="btn btn-info btn-xs open_dialog" data-dialog="#edit_tab_dialog" data-get="/cabinet/tabs/get/{{$tab->id}}">edit</button>
+                                    <a class="btn btn-danger btn-xs open_dialog" href="/cabinet/tabs/{{$tab->id}}/delete">delete</a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
                 @include("dialogs.edit_tab_dialog")
             </div>

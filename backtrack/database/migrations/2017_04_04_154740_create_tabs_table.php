@@ -19,7 +19,7 @@ class CreateTabsTable extends Migration
             $table->integer('song_id', false, true);
             $table->foreign("song_id")->references('id')->on('songs')->onDelete('cascade');
             $table->enum("instrument", ['guitar', 'bass', 'drums', 'lyrics']);
-            $table->integer("tuning_id", false, true)->nullable();
+            $table->integer("tuning_id", false, true)->default(null)->nullable();
             $table->foreign("tuning_id")->references('id')->on('tunings')->onDelete('set null');
             $table->text("content");
 

@@ -16,4 +16,9 @@ class Tab extends Model
     protected $fillable = [
         'song_id', 'instrument', 'tuning_id', 'content'
     ];
+
+    public function tuning() {
+        return $this->belongsTo("App\Tuning");
+    }
+
 }

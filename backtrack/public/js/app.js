@@ -11995,7 +11995,8 @@ $(document).ready(function () {
         }
     });
     $(".ajax-form").ajaxForm({
-        beforeSubmit: function beforeSubmit($form) {
+        beforeSubmit: function beforeSubmit(arr, $form, options) {
+            options.headers = { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') };
             $(".alert", $form).hide();
             $(".button", $form).attr("disabled", "disabled");
         },
@@ -12010,6 +12011,9 @@ $(document).ready(function () {
                     $.notify({
                         message: json.message
                     });
+                }
+                if ($form.data("reload")) {
+                    location.reload();
                 }
             } else {
                 if ($(".alert", $form).length) {
@@ -13353,9 +13357,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
  */
 $(".open_dialog").click(function () {
     var $dialog = $($(this).data("dialog"));
+    var getUrl = $(this).data("get");
+    if (getUrl) {
+        $.getJSON(getUrl, function (json) {
+            if (json.success) {
+                $.each(json.data, function (index, val) {
+                    $("input[name=" + index + "]").val(val);
+                    $("select[name=" + index + "]").val(val);
+                    $("textarea[name=" + index + "]").html(val);
+                });
+            }
+        });
+    }
     if ($dialog.length) {
-        $("input", $dialog).val("");
-        $("textarea", $dialog).text("");
+        $("input.fillable", $dialog).val("");
+        $("textarea.fillable", $dialog).text("");
         $dialog.modal();
     }
 });

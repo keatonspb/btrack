@@ -41,7 +41,8 @@ $(document).ready(function () {
     );
     $(".ajax-form").ajaxForm(
         {
-            beforeSubmit: function ($form) {
+            beforeSubmit: function (arr, $form, options) {
+                options.headers = {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
                 $(".alert", $form).hide();
                 $(".button", $form).attr("disabled", "disabled");
             },
@@ -56,6 +57,9 @@ $(document).ready(function () {
                         $.notify({
                             message: json.message
                         });
+                    }
+                    if($form.data("reload")) {
+                        location.reload();
                     }
 
                 } else {

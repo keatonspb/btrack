@@ -6,8 +6,9 @@
                 </button>
                 <h4 class="modal-title">Tab</h4>
             </div>
-            <form method="post" class="ajax-form dialog-form" action="/cabinet/tabs/save">
-                <input type="hidden" name="id" />
+            <form method="post" class="ajax-form dialog-form" data-reload="1" action="/cabinet/tabs/save">
+                {{ csrf_field() }}
+                <input type="hidden" name="id" class="fillable" />
                 <input type="hidden" name="song_id" value="{{$song->id}}" />
             <div class="modal-body">
                 <div class="alert" style="display: none"></div>
@@ -15,7 +16,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="td_type">Type</label>
-                            <select id="td_type" name="instrument" class="form-control">
+                            <select id="td_type" name="instrument" class="form-control fillable">
                                 <option value="guitar">Guitar</option>
                                 <option value="bass">Bass</option>
                                 <option value="drums">Drums</option>
@@ -25,8 +26,8 @@
                     </div>
                     <div class="col-lg-6">
                         <label for="td_tunning">Tuning</label>
-                        <select class="form-control" id="td_tunning" name="tuning_id">
-                            <option>No tuning</option>
+                        <select class="form-control fillable" id="td_tunning" name="tuning_id">
+                            <option value="0">No tuning</option>
                             @foreach($tunings as $tuning)
                                 <option value="{{$tuning->id}}" for="{{$tuning->instrument}}">{{$tuning->name}} ({{$tuning->strings}})</option>
                             @endforeach
@@ -36,7 +37,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <label for="td_tab">Tab</label>
-                        <textarea rows="10" name="content" id="td_tab" class="form-control"></textarea>
+                        <textarea rows="10" name="content" id="td_tab" class="form-control fillable"></textarea>
                     </div>
                 </div>
 

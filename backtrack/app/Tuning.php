@@ -13,5 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tuning extends Model
 {
+
     public $timestamps = false;
 }

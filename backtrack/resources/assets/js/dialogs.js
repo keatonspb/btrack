@@ -3,9 +3,21 @@
  */
 $(".open_dialog").click(function () {
     var $dialog = $($(this).data("dialog"));
+    var getUrl = $(this).data("get");
+    if(getUrl) {
+        $.getJSON(getUrl, function (json) {
+            if(json.success) {
+                $.each(json.data, function (index, val) {
+                    $("input[name="+index+"]").val(val);
+                    $("select[name="+index+"]").val(val);
+                    $("textarea[name="+index+"]").html(val);
+                });
+            }
+        });
+    }
     if($dialog.length) {
-        $("input", $dialog).val("");
-        $("textarea", $dialog).text("");
+        $("input.fillable", $dialog).val("");
+        $("textarea.fillable", $dialog).text("");
         $dialog.modal();
 
     }

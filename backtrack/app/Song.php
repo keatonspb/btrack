@@ -30,6 +30,11 @@ class Song extends Model
         return $this->hasMany('App\Track');
     }
 
+    public function tabs()
+    {
+        return $this->hasMany('App\Tab');
+    }
+
 
     public static function getOrCreate($name, $author)
     {
