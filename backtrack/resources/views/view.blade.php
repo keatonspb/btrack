@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', $song->name . " ". $author->name . " backing track and tabs")
 @section('content')
     <div class="container">
 

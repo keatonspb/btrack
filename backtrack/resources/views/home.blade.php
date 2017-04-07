@@ -16,3 +16,4 @@
     </div>
 </div>
 @endsection
+@section('title', 'Guitar, Drums backtracks and tabs for free')

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', $song->name." - Edit backing track")
 @section('content')
     <div class="container">
 

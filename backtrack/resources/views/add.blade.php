@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', "Add backing track and tabs")
 @section('content')
 <div class="container">
 
