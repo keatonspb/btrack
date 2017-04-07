@@ -1,12 +1,15 @@
-function loadTabs() {
-    var href = $(".active .song-tab").attr("href").substring(1);
-    type = href.split("-");
-    console.info(type);
+if($(".tabtab-panel").length) {
 
+    $(".tabswitch").click(function () {
+        href = $(this).attr("href").replace("#", "");
+        $(this).parent().siblings("li").removeClass("active");
+        $(this).parents(".tabs-select").find(".title").html($(this).html())
+        $(this).parent().addClass("active");
+        $(".tabtab-panel").removeClass("active");
+        $(".tabtab-panel#"+href+"_").addClass("active");
+    });
+    if(location.hash) {
+        hash =location.hash.replace("#", "");
+        $(".tabswitch[href='"+location.hash+"']").click();
+    }
 }
-
-$('a.song-tab').on('shown.bs.tab', function (e) {
-
-    e.target // newly activated tab
-    e.relatedTarget // previous active tab
-});

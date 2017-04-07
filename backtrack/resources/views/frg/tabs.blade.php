@@ -22,12 +22,12 @@
                     @if($tabs_instrument['count_tabs'] > 1)
                         <div class="dropdown tabs-select pull-right">
                             <button type="button" data-toggle="dropdown" class="btn btn-default">
-                                Tab 1
+                                <span class="title">Tab 1</span>
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dLabel">
                                 @foreach($tabs_instrument['tabs'] as $tab)
-                                    <li><a href="#tab_{{$tabs_instrument['name']}}_{{$tab->id}}">Tab {{$loop->index+1}}</a></li>
+                                    <li class="@if ($loop->first) active @endif" role="presentation"><a class="tabswitch" href="#tab_{{$tabs_instrument['name']}}_{{$tab->id}}">Tab {{$loop->index+1}}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -35,7 +35,7 @@
                     @endif
 
                         @foreach($tabs_instrument['tabs'] as $tab)
-                            <div class="tabtab-panel @if ($loop->first) active @endif {{$tab->instrument}}">
+                            <div class="tabtab-panel @if ($loop->first) active @endif {{$tab->instrument}}" id="tab_{{$tabs_instrument['name']}}_{{$tab->id}}_">
                                 <div class="info">
                                     @if($tab->tuning_name) Tunning: <strong>{{$tab->tuning_name}} ({{$tab->tuning_strings}})</strong> @endif
                                 </div>

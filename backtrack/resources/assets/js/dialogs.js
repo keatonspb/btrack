@@ -17,7 +17,8 @@ $(".open_dialog").click(function () {
     }
     if($dialog.length) {
         $("input.fillable", $dialog).val("");
-        $("textarea.fillable", $dialog).text("");
+        $("textarea.fillable", $dialog).html("");
+
         $dialog.modal();
 
     }
