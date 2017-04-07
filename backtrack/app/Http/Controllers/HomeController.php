@@ -53,14 +53,28 @@ class HomeController extends Controller
         } else {
             $track = $song->tracks->first();
         }
-
-
+        $tabsCol = $song->tabs()->leftJoin('tunings', 'tunings.id', '=', 'tabs.tuning_id')->select("tabs.*", "tunings.name as tuning_name", "tunings.strings as tuning_strings")->get();
+        $tabs = [];
+        $tabs_instruments = [];
+        foreach ($tabsCol as $tab) {
+            if(!isset($tabs_instruments[$tab->instrument])) {
+                $tabs_instruments[$tab->instrument] = [
+                    "name" => $tab->instrument,
+                    "count_tabs" => 0,
+                    "tabs" => []
+                ];
+            }
+            $tab->content = str_replace("\n", "<br>", $tab->content);
+            $tabs_instruments[$tab->instrument]['tabs'][] = $tab;
+            $tabs_instruments[$tab->instrument]['count_tabs']++;
+        }
 
         return view('view', [
             "song" => $song,
             "author" => $song->author,
             "track" => $track,
             "alttracks" => $track->getAlternativeTracks(),
+            "tabs_instruments" => $tabs_instruments
 
         ]);
     }

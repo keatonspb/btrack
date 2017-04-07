@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class TabController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function save(Request $request) {
         $json = ["success"=>true, "message"=>"Tab saved"];
         try {
@@ -16,13 +20,15 @@ class TabController extends Controller
                 "instrument" => $request->get("instrument"),
                 "tuning_id" => $request->get("tuning_id") ? $request->get("tuning_id") : null,
                 "content" => $request->get("content"),
+                "id" => null,
             ];
-            if($request->get("id")) {
+
+            if($request->get("id", null)) {
                 $row['id'] = $request->get("id");
             }
             Tab::updateOrCreate(['id'=>$row['id']],$row);
         } catch (\Exception $e) {
-            $json['message'] = $e->getMessage();
+            $json['message'] = $e->getMessage()." ".$e->getFile()." ".$e->getLine();
             $json['success'] = false;
         }
         return json_encode($json);

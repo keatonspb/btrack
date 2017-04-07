@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <label for="td_tab">Tab</label>
-                        <textarea rows="10" name="content" id="td_tab" class="form-control fillable"></textarea>
+                        <textarea rows="10" name="content" id="td_tab" class="form-control fillable monospace"></textarea>
                     </div>
                 </div>
 

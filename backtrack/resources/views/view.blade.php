@@ -18,6 +18,8 @@
                         @include('frg/instruments', ['track'=>$track])
                     </div>
                 </div>
+
+                @include("frg/tabs")
             </div>
             <div class="col-lg-4">
                 <div class="panel panel-default">

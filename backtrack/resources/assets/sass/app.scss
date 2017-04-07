@@ -1,5 +1,6 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700&subset=cyrillic,cyrillic-ext');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
 // Variables
 @import "_variables";
 // Bootstrap
@@ -195,5 +196,25 @@ $player-part-height: 20px;
 
 
     }
+  }
+}
+
+.monospace {
+  font-family: 'Ubuntu Mono', monospace;
+}
+.tab-tab {
+  padding-top: 10px;
+}
+
+.tabtab-panel {
+  display: none;
+  &.active {
+    display: block;
+  }
+  .info {
+    margin-bottom: 10px;
+  }
+  .content {
+    font-family: 'Ubuntu Mono', monospace;
   }
 }
