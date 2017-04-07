@@ -18,8 +18,9 @@
                         @include('frg/instruments', ['track'=>$track])
                     </div>
                 </div>
-
+                @if($tabs_instruments)
                 @include("frg/tabs")
+                    @endif
             </div>
             <div class="col-lg-4">
                 <div class="panel panel-default">
