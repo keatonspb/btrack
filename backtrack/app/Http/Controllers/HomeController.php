@@ -29,10 +29,8 @@ class HomeController extends Controller
 
         $songs->leftJoin('authors', 'songs.author_id', '=', 'authors.id');
         $songs->leftJoin('tracks', 'tracks.song_id', '=', 'songs.id');
-        $songs->leftJoin('tabs', 'tracks.song_id', '=', 'songs.id');
         $songs->groupBy("songs.id");
         $songs->select("songs.*", "authors.name as author_name", DB::raw("COUNT(tracks.id) as tcount"),
-            DB::raw("COUNT(tabs.id) as tabs"),
             DB::raw("SUM(tracks.bass) as bass"),
             DB::raw("SUM(tracks.drums) as drums"),
             DB::raw("SUM(tracks.vocals) as vocals"),
@@ -40,6 +38,7 @@ class HomeController extends Controller
             DB::raw("SUM(tracks.rhythm) as rhythm"),
             DB::raw("SUM(tracks.bass) as bass")
             );
+        $songs->with("tabs");
         return view('home', [
             "songs" => $songs->paginate(20)
     ]);

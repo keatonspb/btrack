@@ -27,3 +27,5 @@ Route::post('/cabinet/tabs/save', 'TabController@save');
 Route::get('/cabinet/tabs/get/{id}', 'TabController@get');
 Route::get('/cabinet/tabs/{tab}/delete', 'TabController@delete');
 Route::get("/cabinet/track/delete/{track}", 'CabinetController@deleteTrack');
+
+Route::get("/search", 'SearchController@search');

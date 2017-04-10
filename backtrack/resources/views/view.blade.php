@@ -7,9 +7,11 @@
             <div class="col-lg-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">{{$song->name}} - {{$author->name}}
+                        @if(Auth::check())
                         <div class="pull-right">
                             <a class="btn btn-info btn-xs" href="/cabinet/track/edit/{{$track->id}}">Edit track</a>
                         </div>
+                        @endif
                     </div>
                     <div class="panel-body">
                         @include("frg/player", ['class'=>''])
@@ -25,8 +27,10 @@
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">Song info
+                        @if(Auth::check())
                         <div class="pull-right"><a class="btn btn-info btn-xs" href="/cabinet/song/edit/{{$song->id}}">Edit
                                 song</a></div>
+                            @endif
                     </div>
                     <div class="panel-body">
                         <div class="row">

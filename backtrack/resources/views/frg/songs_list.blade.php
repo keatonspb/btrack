@@ -10,7 +10,7 @@
         <tr>
             <td><a href="/song/{{$song->id}}">{{$song->name}}</a> - {{$song->author_name}}</td>
             <td style="text-align: right;">
-                @if($song->tabs)
+                @if(sizeof($song->tabs))
                     <span class="hastabs" title="has tabs"></span>
                 @endif
                 @include('frg/instruments', ['track'=>$song])
