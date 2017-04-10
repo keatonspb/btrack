@@ -60,4 +60,12 @@ class Track extends Model
         $props = json_decode($this->properties);
         return $props->cues ?? [];
     }
+
+    public function delete()
+    {
+        if(!Storage::disk("s3")->delete(self::$folder."/".$this->filename)) {
+            throw new \LogicException("Cant delete dile");
+        }
+        return parent::delete();
+    }
 }

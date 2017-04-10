@@ -7,6 +7,7 @@ use App\Song;
 use App\Tab;
 use App\Track;
 use App\Tuning;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -67,6 +68,19 @@ class CabinetController extends Controller
             "cues" => $track->getCues(),
             "acues" => Track::CUES
         ]);
+    }
+
+    public function deleteTrack(Request $request, $track_id) {
+        $json = ['success' => true];
+        try {
+            $Track = Track::findOrFail($track_id);
+            $Track->delete();
+        } catch (\Exception $e) {
+            $json['success'] = false;
+            $json['message'] = $e->getMessage();
+        }
+        return new JsonResponse($json);
+
     }
 
     public function submitSong(Request $request)

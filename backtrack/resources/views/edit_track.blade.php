@@ -28,6 +28,9 @@
                         <div class="checkbox-inline"><label><input class="edit_instrument" data-id="{{$track->id}}" type="checkbox" name="keys" value="1" @if($track->keys) checked @endif> keys</label></div>
                         <div>
                             <button class="btn btn-primary">Save</button>
+                            <div class="pull-right">
+                                <a class="btn btn-danger delete-item" href="/cabinet/track/delete/{{$track->id}}" data-backurl="/cabinet/song/edit/{{$track->song_id}}">Delete</a>
+                            </div>
                         </div>
                     </form>
                     </div>

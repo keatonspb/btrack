@@ -28,7 +28,7 @@
   }
 }
 
-$instrument_icon_height: 24px;
+$instrument_icon_height: 20px;
 a:hover {
      .instruments {
        li {
@@ -37,7 +37,16 @@ a:hover {
 
      }
 }
+.hastabs {
+  display: inline-block;
+  width: $instrument_icon_height;
+  height: $instrument_icon_height;
+  background: url("img/mediator.svg");
+  background-size: cover;
+  margin-right: 10px;
+}
 .instruments {
+  display: inline-block;
   padding: 0;
   margin: 0;
   list-style: none;

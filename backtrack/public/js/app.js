@@ -63,164 +63,11 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function($) {
-__webpack_require__(47);
-__webpack_require__(51);
-__webpack_require__(22);
-__webpack_require__(59);
-
-__webpack_require__(49);
-__webpack_require__(48);
-
-$(document).ready(function () {
-
-    $(".player").btplayer();
-    $(".edit_track_form").ajaxForm({
-        dataType: "json",
-        success: function success(json, statusText, xhr, $form) {
-            if (json.success) {
-                $.notify({
-                    message: json.message
-                });
-            } else {
-                $.notify({
-                    message: json.message
-                }, {
-                    type: 'danger'
-                });
-            }
-        }
-    });
-    $(".ajax-form").ajaxForm({
-        beforeSubmit: function beforeSubmit(arr, $form, options) {
-            options.headers = { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') };
-            $(".alert", $form).hide();
-            $(".button", $form).attr("disabled", "disabled");
-        },
-        dataType: "json",
-        success: function success(json, statusText, xhr, $form) {
-            $(".button", $form).removeAttr("disabled", "disabled");
-
-            if (json.success) {
-                if ($(".alert", $form).length) {
-                    $(".alert", $form).removeClass("alert-danger").addClass("alert-success").html(json.message).show();
-                } else {
-                    $.notify({
-                        message: json.message
-                    });
-                }
-                if ($form.data("reload")) {
-                    location.reload();
-                }
-            } else {
-                if ($(".alert", $form).length) {
-                    $(".alert", $form).removeClass("alert-success").addClass("alert-danger").html(json.message).show();
-                } else {
-                    $.notify({
-                        message: json.message
-                    }, {
-                        type: 'danger'
-                    });
-                }
-            }
-        },
-        error: function error(json, statusText, xhr, $form) {
-
-            if ($(".alert", $form).length) {
-                $(".alert", $form).removeClass("alert-success").addClass("alert-danger").html("Error on form submit").show();
-            } else {
-                $.notify({
-                    message: "Error on form submit"
-                }, {
-                    type: 'danger'
-                });
-            }
-        }
-    });
-    $(".track-form").ajaxForm({
-        uploadProgress: function uploadProgress(event, pos, total, percentComplete) {
-            $(".track-form .progress").show();
-            $(".track-form .progress .progress-bar").css("width", percentComplete + "%");
-            $(".track-form .progress .progress-bar .sr-only").html(percentComplete + "%");
-        },
-        beforeSubmit: function beforeSubmit($form) {
-            $(".alert", $form).hide();
-            $(".button", $form).attr("disabled", "disabled");
-        },
-        dataType: "json",
-        success: function success(json, statusText, xhr, $form) {
-            console.info($form);
-            $(".button", $form).removeAttr("disabled", "disabled");
-            if (json.success) {
-                location.href = "/cabinet/song/edit/" + json.id;
-                $(".alert-success", $form).html(json.message).show();
-            } else {
-                $(".alert-danger", $form).html(json.message).show();
-            }
-        }
-    });
-    __webpack_require__(50);
-
-    $(".delete-item").click(function () {
-        var resultConfirm = confirm("Are you sure?");
-        if (resultConfirm) {
-            $.getJSON($(this).attr("href"), function (json) {
-                if (json.success) {
-                    location.reload();
-                } else {
-                    $.notify({
-                        message: json.message
-                    }, {
-                        type: 'danger'
-                    });
-                }
-            });
-        }
-        return false;
-    });
-
-    __webpack_require__(65);
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(0);
-module.exports = __webpack_require__(1);
-
-
-/***/ }),
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10480,15 +10327,14 @@ return jQuery;
 
 
 /***/ }),
-/* 19 */,
-/* 20 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(18) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -10507,8 +10353,7 @@ return $.ui.version = "1.12.1";
 
 
 /***/ }),
-/* 21 */,
-/* 22 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10530,7 +10375,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(18), __webpack_require__(20) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(1) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -11250,31 +11095,138 @@ return $.widget;
 
 
 /***/ }),
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {
+__webpack_require__(5);
+__webpack_require__(9);
+__webpack_require__(2);
+__webpack_require__(18);
+
+__webpack_require__(7);
+__webpack_require__(6);
+
+$(document).ready(function () {
+
+    $(".player").btplayer();
+    $(".edit_track_form").ajaxForm({
+        dataType: "json",
+        success: function success(json, statusText, xhr, $form) {
+            if (json.success) {
+                $.notify({
+                    message: json.message
+                });
+            } else {
+                $.notify({
+                    message: json.message
+                }, {
+                    type: 'danger'
+                });
+            }
+        }
+    });
+    $(".ajax-form").ajaxForm({
+        beforeSubmit: function beforeSubmit(arr, $form, options) {
+            options.headers = { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') };
+            $(".alert", $form).hide();
+            $(".button", $form).attr("disabled", "disabled");
+        },
+        dataType: "json",
+        success: function success(json, statusText, xhr, $form) {
+            $(".button", $form).removeAttr("disabled", "disabled");
+
+            if (json.success) {
+                if ($(".alert", $form).length) {
+                    $(".alert", $form).removeClass("alert-danger").addClass("alert-success").html(json.message).show();
+                } else {
+                    $.notify({
+                        message: json.message
+                    });
+                }
+                if ($form.data("reload")) {
+                    location.reload();
+                }
+            } else {
+                if ($(".alert", $form).length) {
+                    $(".alert", $form).removeClass("alert-success").addClass("alert-danger").html(json.message).show();
+                } else {
+                    $.notify({
+                        message: json.message
+                    }, {
+                        type: 'danger'
+                    });
+                }
+            }
+        },
+        error: function error(json, statusText, xhr, $form) {
+
+            if ($(".alert", $form).length) {
+                $(".alert", $form).removeClass("alert-success").addClass("alert-danger").html("Error on form submit").show();
+            } else {
+                $.notify({
+                    message: "Error on form submit"
+                }, {
+                    type: 'danger'
+                });
+            }
+        }
+    });
+    $(".track-form").ajaxForm({
+        uploadProgress: function uploadProgress(event, pos, total, percentComplete) {
+            $(".track-form .progress").show();
+            $(".track-form .progress .progress-bar").css("width", percentComplete + "%");
+            $(".track-form .progress .progress-bar .sr-only").html(percentComplete + "%");
+        },
+        beforeSubmit: function beforeSubmit($form) {
+            $(".alert", $form).hide();
+            $(".button", $form).attr("disabled", "disabled");
+        },
+        dataType: "json",
+        success: function success(json, statusText, xhr, $form) {
+            console.info($form);
+            $(".button", $form).removeAttr("disabled", "disabled");
+            if (json.success) {
+                location.href = "/cabinet/song/edit/" + json.id;
+                $(".alert-success", $form).html(json.message).show();
+            } else {
+                $(".alert-danger", $form).html(json.message).show();
+            }
+        }
+    });
+    __webpack_require__(8);
+
+    $(".delete-item").click(function () {
+        var resultConfirm = confirm("Are you sure?");
+        var backurl = $(this).data("backurl") ? $(this).data("backurl") : location.href;
+        if (resultConfirm) {
+            $.getJSON($(this).attr("href"), function (json) {
+                if (json.success) {
+                    location.href = backurl;
+                } else {
+                    $.notify({
+                        message: json.message
+                    }, {
+                        type: 'danger'
+                    });
+                }
+            });
+        }
+        return false;
+    });
+
+    __webpack_require__(10);
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -11285,18 +11237,18 @@ return $.widget;
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = __webpack_require__(18);
+window.$ = window.jQuery = __webpack_require__(0);
 
-__webpack_require__(52);
+__webpack_require__(11);
 
 /***/ }),
-/* 48 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 !function (t) {
-   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(18)], __WEBPACK_AMD_DEFINE_FACTORY__ = (t),
+   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (t),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : t("object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? require("jquery") : jQuery);
@@ -11398,7 +11350,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 49 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -11415,7 +11367,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
  */
 !function (e) {
   "use strict";
-   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(18)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
+   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : e("undefined" != typeof jQuery ? jQuery : window.Zepto);
@@ -11674,7 +11626,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 50 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {/**
@@ -11701,10 +11653,10 @@ $(".open_dialog").click(function () {
         $dialog.modal();
     }
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 51 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {
@@ -11861,10 +11813,31 @@ $(".open_dialog").click(function () {
         }
     };
 })(jQuery);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 52 */
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {if ($(".tabtab-panel").length) {
+
+    $(".tabswitch").click(function () {
+        href = $(this).attr("href").replace("#", "");
+        $(this).parent().siblings("li").removeClass("active");
+        $(this).parents(".tabs-select").find(".title").html($(this).html());
+        $(this).parent().addClass("active");
+        $(".tabtab-panel").removeClass("active");
+        $(".tabtab-panel#" + href + "_").addClass("active");
+    });
+    if (location.hash) {
+        hash = location.hash.replace("#", "");
+        $(".tabswitch[href='" + location.hash + "']").click();
+    }
+}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/*!
@@ -14245,10 +14218,10 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 53 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -14269,7 +14242,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(18), __webpack_require__(20) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(1) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -14296,14 +14269,14 @@ return $.extend( $.expr[ ":" ], {
 
 
 /***/ }),
-/* 54 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(18), __webpack_require__(20) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(1) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -14320,14 +14293,14 @@ return $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
 
 /***/ }),
-/* 55 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(18), __webpack_require__(20) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(1) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -14373,14 +14346,14 @@ return $.ui.plugin = {
 
 
 /***/ }),
-/* 56 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(18), __webpack_require__(20) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(1) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -14422,14 +14395,14 @@ return $.ui.safeActiveElement = function( document ) {
 
 
 /***/ }),
-/* 57 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(18), __webpack_require__(20) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(1) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -14452,7 +14425,7 @@ return $.ui.safeBlur = function( element ) {
 
 
 /***/ }),
-/* 58 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -14473,7 +14446,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(18), __webpack_require__(20) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(1) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -14506,7 +14479,7 @@ return $.fn.scrollParent = function( includeHidden ) {
 
 
 /***/ }),
-/* 59 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -14530,15 +14503,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-			__webpack_require__(18),
-			__webpack_require__(60),
-			__webpack_require__(53),
-			__webpack_require__(55),
-			__webpack_require__(56),
-			__webpack_require__(57),
-			__webpack_require__(58),
-			__webpack_require__(20),
-			__webpack_require__(22)
+			__webpack_require__(0),
+			__webpack_require__(19),
+			__webpack_require__(12),
+			__webpack_require__(14),
+			__webpack_require__(15),
+			__webpack_require__(16),
+			__webpack_require__(17),
+			__webpack_require__(1),
+			__webpack_require__(2)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -15765,7 +15738,7 @@ return $.ui.draggable;
 
 
 /***/ }),
-/* 60 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15787,10 +15760,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-			__webpack_require__(18),
-			__webpack_require__(54),
-			__webpack_require__(20),
-			__webpack_require__(22)
+			__webpack_require__(0),
+			__webpack_require__(13),
+			__webpack_require__(1),
+			__webpack_require__(2)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -16000,29 +15973,12 @@ return $.widget( "ui.mouse", {
 
 
 /***/ }),
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {if ($(".tabtab-panel").length) {
+__webpack_require__(3);
+module.exports = __webpack_require__(4);
 
-    $(".tabswitch").click(function () {
-        href = $(this).attr("href").replace("#", "");
-        $(this).parent().siblings("li").removeClass("active");
-        $(this).parents(".tabs-select").find(".title").html($(this).html());
-        $(this).parent().addClass("active");
-        $(".tabtab-panel").removeClass("active");
-        $(".tabtab-panel#" + href + "_").addClass("active");
-    });
-    if (location.hash) {
-        hash = location.hash.replace("#", "");
-        $(".tabswitch[href='" + location.hash + "']").click();
-    }
-}
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
 
 /***/ })
 /******/ ]);

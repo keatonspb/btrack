@@ -18,6 +18,7 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <a class="btn btn-info btn-sm" href="/cabinet/track/edit/{{$track->id}}">Edit</a>
+
                                 </div>
                             </div>
                         @endforeach

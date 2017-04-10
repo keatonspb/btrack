@@ -109,10 +109,11 @@ $(document).ready(function () {
 
     $(".delete-item").click(function () {
         var resultConfirm = confirm("Are you sure?");
+        var backurl = $(this).data("backurl") ? $(this).data("backurl") : location.href;
         if(resultConfirm) {
             $.getJSON($(this).attr("href"), function (json) {
                 if(json.success) {
-                    location.reload();
+                    location.href = backurl;
                 } else {
                     $.notify({
                         message: json.message
