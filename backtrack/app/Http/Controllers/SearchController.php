@@ -28,7 +28,7 @@ class SearchController extends Controller
             DB::raw("SUM(tracks.vocals) as vocals"),
             DB::raw("SUM(tracks.lead) as lead"),
             DB::raw("SUM(tracks.rhythm) as rhythm"),
-            DB::raw("SUM(tracks.bass) as bass")
+            DB::raw("SUM(tracks.keys) as 'keys'")
         );
         $songs->with("tabs");
         return view('search', [

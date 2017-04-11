@@ -17,4 +17,4 @@
 </div>
 @endsection
 @section("search-term", $searchterm)
-@section('title', 'Search for '. $searchterm .' Guitar, Drums backtracks and tabs for free')
+@section('title', 'Search for "'. $searchterm .'" in guitar, drums backtracks and tabs for free')
