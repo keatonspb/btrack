@@ -74,6 +74,9 @@ class CabinetController extends Controller
         $json = ['success' => true];
         try {
             $Track = Track::findOrFail($track_id);
+            if($Track->user_id != Auth::user()->id) {
+                throw new \Exception("You cannot delete track");
+            }
             $Track->delete();
         } catch (\Exception $e) {
             $json['success'] = false;
@@ -125,31 +128,24 @@ class CabinetController extends Controller
         ];
         try {
             DB::beginTransaction();
+            if(!Auth::user()->super) {
+                throw new \Exception("You cannot edit song");
+            }
             $song = Song::find($request->get("id"));
+
             if($request->get("name")) {
                 $song->name = $request->get("name");
                 $author = Author::getOrCreate($request->get("author"));
                 $song->author_id = $author->id;
             }
-            if($request->get("guitar_tabs")) {
 
-            }
-            if($request->get("bass_tabs")) {
-
-            }
-            if($request->get("lyrics_tabs")) {
-
-            }
-            if($request->get("drum_tabs")) {
-
-            }
             $song->save();
             $json['id'] = $song->id;
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             $json['success'] = false;
-            $json['message'] = $e->getMessage() . " " . $e->getFile() . " " . $e->getLine();
+            $json['message'] = $e->getMessage();
         }
         return response()->json($json);
     }
@@ -162,13 +158,15 @@ class CabinetController extends Controller
         ];
         try {
             DB::beginTransaction();
+
             if (!$request->get("id")) {
                 throw new \Exception("Bad request");
             }
 
-            $track = Track::find($request->get("id"));
-            if (!$track) {
-                throw new \Exception("Track not found");
+            $track = Track::findOrFail($request->get("id"));
+
+            if($track->user_id != Auth::user()->id) {
+                throw new \Exception("You cannot edit this track");
             }
             $track->bass = $request->get("bass", false);
             $track->drums = $request->get("drums", false);

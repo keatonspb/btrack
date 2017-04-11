@@ -347,16 +347,21 @@
       <Position>7</Position>
       <DataType>timestamp|0</DataType>
     </column>
-    <index id="84" parent="16" name="users_email_unique">
+    <column id="84" parent="16" name="super">
+      <Position>8</Position>
+      <DataType>int(1)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <index id="85" parent="16" name="users_email_unique">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="85" parent="16" name="PRIMARY">
+    <key id="86" parent="16" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="86" parent="16" name="users_email_unique">
+    <key id="87" parent="16" name="users_email_unique">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>users_email_unique</UnderlyingIndexName>
     </key>

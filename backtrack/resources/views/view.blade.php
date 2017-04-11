@@ -7,7 +7,7 @@
             <div class="col-lg-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">{{$song->name}} - {{$author->name}}
-                        @if(Auth::check())
+                        @if(Auth::check() && Auth::user()->id == $track->user_id)
                         <div class="pull-right">
                             <a class="btn btn-info btn-xs" href="/cabinet/track/edit/{{$track->id}}">Edit track</a>
                         </div>
@@ -27,7 +27,7 @@
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">Song info
-                        @if(Auth::check())
+                        @if(Auth::check() && Auth::user()->super)
                         <div class="pull-right"><a class="btn btn-info btn-xs" href="/cabinet/song/edit/{{$song->id}}">Edit
                                 song</a></div>
                             @endif
