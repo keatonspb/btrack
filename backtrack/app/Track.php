@@ -21,6 +21,7 @@ class Track extends Model
         "verse" => "Verse",
         "pre-chorus" => "Pre-Chorus",
         "chorus" => "Chorus",
+        "bridge" => "Bridge",
         "pre-solo" => "Pre-Solo",
         "solo" => "Solo",
         "outro" => "Outro",
