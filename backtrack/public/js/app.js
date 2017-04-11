@@ -11768,12 +11768,13 @@ $(".open_dialog").click(function () {
                 $("#edit_cue_dialog .btn-primary").click(function () {
                     cue_dialog.modal("hide");
                     cue = $("<div class='part'/>");
-                    cid = "cue_" + new Date().getTime() / 1000;
-                    cue.data("data-for", cid);
+                    cid = "cue_" + new Date().getTime();
+                    cue.attr("data-for", cid);
                     perc = song.currentTime / song.duration * 100;
                     cue.css("left", perc + "%");
                     cue_name = $("select", cue_dialog).val();
                     cue.html("<div class='cue'></div> <span>" + $("select option:selected", cue_dialog).html() + "</span>");
+
                     $(".parts_container", elem).prepend(cue);
                     input = $("<input type='hidden' id='" + cid + "' name='" + cue_name + "[]' value='" + perc + "' />");
                     $(".cue_container").append(input);
@@ -11801,7 +11802,7 @@ $(".open_dialog").click(function () {
             var id = $(el).data("for");
             var parent = $(el).parent();
             perc = $(el).position().left / parent.width() * 100;
-            console.info(perc);
+
             $("#" + id).val(perc);
         }
 
