@@ -11707,6 +11707,7 @@ $(".open_dialog").click(function () {
                     $(".fa", this).removeClass("fa-pause").addClass("fa-play");
                 }
             });
+
             next.click(function () {
                 perc = song.currentTime / song.duration * 100;
                 var fouded_cue = perc;
@@ -11722,17 +11723,42 @@ $(".open_dialog").click(function () {
 
             prev.click(function () {
                 perc = song.currentTime / song.duration * 100;
-                var fouded_cue = perc;
+                var fouded_cue = null;
                 cues = collectCues(elem);
                 console.info(cues, perc);
                 for (var i = cues.length - 1; i > 0; i--) {
                     console.info(cues[i]);
                     if (cues[i] <= perc) {
+                        breaked = false;
+                        if (fouded_cue) {
+                            breaked = true;
+                        }
                         fouded_cue = cues[i];
-                        break;
+                        if (breaked) {
+                            break;
+                        }
                     }
                 }
                 song.currentTime = song.duration * (fouded_cue / 100);
+            });
+            $(window).keypress(function (e) {
+                if (e.keyCode === 0 || e.keyCode === 32) {
+                    e.preventDefault();
+                }
+            });
+            $(window).keyup(function (e) {
+                if (e.keyCode === 0 || e.keyCode === 32) {
+                    e.preventDefault();
+                    play.click();
+                }
+                if (e.keyCode === 39) {
+                    e.preventDefault();
+                    next.click();
+                }
+                if (e.keyCode === 37) {
+                    e.preventDefault();
+                    prev.click();
+                }
             });
 
             $(".part", elem).click(function () {

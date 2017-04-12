@@ -8,7 +8,7 @@
             </div>
             <form method="post" class="ajax-form dialog-form" data-reload="1" action="/cabinet/tabs/save">
                 {{ csrf_field() }}
-                <input type="hidden" name="id" class="fillable" />
+                <input type="hidden" name="id" class="fillable" value="" />
                 <input type="hidden" name="song_id" value="{{$song->id}}" />
             <div class="modal-body">
                 <div class="alert" style="display: none"></div>
