@@ -11741,11 +11741,7 @@ $(".open_dialog").click(function () {
                 }
                 song.currentTime = song.duration * (fouded_cue / 100);
             });
-            $(window).keypress(function (e) {
-                if (e.keyCode === 0 || e.keyCode === 32) {
-                    e.preventDefault();
-                }
-            });
+
             $(window).keyup(function (e) {
                 if (e.keyCode === 0 || e.keyCode === 32) {
                     e.preventDefault();

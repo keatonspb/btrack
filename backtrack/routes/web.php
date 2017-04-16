@@ -29,3 +29,5 @@ Route::get('/cabinet/tabs/{tab}/delete', 'TabController@delete');
 Route::get("/cabinet/track/delete/{track}", 'CabinetController@deleteTrack');
 
 Route::get("/search", 'SearchController@search');
+
+Route::get("/api/list", 'ApiController@search');
