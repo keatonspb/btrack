@@ -92,7 +92,13 @@
 
         @yield('content')
     </div>
-
+    <div class="navbar-bottom row-fluid">
+        <div class="navbar-inner">
+            <div class="container">
+                All original tracks and lyrics are property and copyright of their owners. Information on this page provided for educational purposes and personal use only.
+            </div>
+        </div>
+    </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 @include("frg/counters")
