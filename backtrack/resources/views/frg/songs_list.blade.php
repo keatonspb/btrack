@@ -17,6 +17,6 @@
             </td>
         </tr>
     @endforeach
-
     </tbody>
 </table>
+{{ $songs->links() }}
