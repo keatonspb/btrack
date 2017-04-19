@@ -37,6 +37,5 @@ class Grabber extends Command
         $client = new Client();
         $res = $client->get($base_url);
         $str = $res->getBody();
-        echo $str;
     }
 }
