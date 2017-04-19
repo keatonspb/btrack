@@ -23,7 +23,8 @@
     </script>
 </head>
 <body>
-    <div id="app">
+<div class="wrapper">
+    <div class="app_content">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -92,13 +93,17 @@
 
         @yield('content')
     </div>
-    <div class="navbar-bottom row-fluid">
-        <div class="navbar-inner">
-            <div class="container">
-                All original tracks and lyrics are property and copyright of their owners. Information on this page provided for educational purposes and personal use only.
+    <footer>
+        <div class="container">
+            <div class="disclamer">All original tracks and lyrics are property and copyright of their owners. Information on this page provided for educational purposes and personal use only.</div>
+            <div class="contacts">
+                For any questions discodeprojects@gmail.com
             </div>
         </div>
-    </div>
+
+    </footer>
+</div>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 @include("frg/counters")

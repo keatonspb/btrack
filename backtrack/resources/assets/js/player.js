@@ -81,17 +81,23 @@
                 }
                 song.currentTime = song.duration * (fouded_cue/100);
             });
-
+            $(window).keypress(function (e) {
+                console.info(e);
+                if (e.target == document.body && (e.which === 0 || e.which === 32)) {
+                    e.preventDefault();
+                }
+            })
             $(window).keyup(function (e) {
-                if (e.keyCode === 0 || e.keyCode === 32) {
+                if (e.target == document.body && (e.keyCode === 0 || e.keyCode === 32)) {
                     e.preventDefault()
                     play.click();
+                    return false;
                 }
-                if (e.keyCode === 39) {
+                if (e.target == document.body && e.keyCode === 39) {
                     e.preventDefault();
                     next.click();
                 }
-                if (e.keyCode === 37) {
+                if (e.target == document.body && e.keyCode === 37) {
                     e.preventDefault();
                     prev.click();
                 }
