@@ -39,7 +39,7 @@ class GrabberArtists extends BaseGrabber
     {
         $client = $this->getClient();
 
-        $res = $client->get("/bands/A.htm");
+        $res = $client->get("/bands/Z.htm");
         $crawler = new Crawler($res->getBody()->getContents());
         DB::beginTransaction();
         try {
@@ -55,7 +55,8 @@ class GrabberArtists extends BaseGrabber
                         "id" => $author->id,
                         "name" => $name,
                         "source" => "gbt",
-                        "href" => $this->base_url.$href
+                        "href" => $this->base_url.$href,
+                        "active" => 1,
                     ]);
                     echo $name. " " . $href ."\n";
                 });

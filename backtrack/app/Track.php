@@ -43,6 +43,9 @@ class Track extends Model
         $this->save();
         return $filename;
     }
+
+
+
     public function getFilePath() {
         return Storage::disk("s3")->url(self::$folder."/".$this->filename);
     }

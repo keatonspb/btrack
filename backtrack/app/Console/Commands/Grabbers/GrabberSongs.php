@@ -38,9 +38,11 @@ class GrabberSongs extends BaseGrabber
     public function handle()
     {
         $client = $this->getClient();
-        $items = DB::table("grab_artists_pages")->where("active", 1)->get();
+        $items = DB::table("grab_artists_pages")->where("active", 1)->inRandomOrder()->limit(5)->get();
         foreach ($items as $item) {
             $artist = Author::find($item->id);
+            echo $artist->name."\n";
+            echo "-----------\n";
             $res = $client->get($item->href);
             $crawler = new Crawler($res->getBody()->getContents());
             $crawler->filterXPath("//table//div[contains(@class, 'gbt-b-section--table-cell__top')]/a")->each(function (Crawler $node, $i) use ($artist) {
@@ -53,11 +55,12 @@ class GrabberSongs extends BaseGrabber
                     "source" => "gbt",
                     "name" => $name,
                     "href" => $href,
-                    "status" => 1
+                    "active" => 1
                 ]);
                 echo $name . " " . $href . "\n";
             });
             DB::table("grab_artists_pages")->where("id", $item->id)->update(['active' => 0]);
+
         }
     }
 }

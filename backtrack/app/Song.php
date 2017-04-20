@@ -39,7 +39,12 @@ class Song extends Model
     public static function getOrCreate($name, $author)
     {
         $song = null;
-        $author = Author::getOrCreate($author);
+        if(is_numeric($author)) {
+            $author = Author::find($author);
+        } else {
+            $author = Author::getOrCreate($author);
+        }
+
         if (!$song = self::where("author_id", $author->id)->where("name", $name)->first()) {
             $song = self::create([
                 "name" => $name,
