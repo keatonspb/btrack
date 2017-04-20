@@ -14,7 +14,10 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\SitemapMake::class,
-        \App\Console\Commands\Grabber::class,
+        \App\Console\Commands\Grabbers\GrabberArtists::class,
+        \App\Console\Commands\Grabbers\GrabberSongs::class,
+        \App\Console\Commands\Grabbers\GrabberFiles::class,
+        \App\Console\Commands\UpdateFileHash::class,
     ];
 
     /**

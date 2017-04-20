@@ -29,6 +29,7 @@ class CreateTracksTable extends Migration
             $table->boolean("rhythm")->default(false);
             $table->boolean("keys")->default(false);
             $table->json("properties")->nullable();
+            $table->char("hash", 128);
         });
     }
 

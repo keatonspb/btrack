@@ -11,6 +11,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Track extends Model
@@ -32,16 +33,31 @@ class Track extends Model
     ];
     public function upload(UploadedFile $File) {
         $filename = $this->id.".".$File->getClientOriginalExtension();
+        $hash = md5_file($File->getRealPath());
         if(!Storage::disk("s3")->put(
             self::$folder.'/'.$filename,
             file_get_contents($File->getRealPath()), 'public')) {
             throw new \LogicException("Cant upload");
         }
+        $this->hash = $hash;
+        $this->save();
         return $filename;
     }
     public function getFilePath() {
         return Storage::disk("s3")->url(self::$folder."/".$this->filename);
     }
+    public function getFileHash() {
+        $adapter = Storage::disk("s3")->getDriver()->getAdapter();
+        if ($adapter instanceof AwsS3Adapter) {
+            $object = $adapter->getClient()->getObject([
+                'Bucket' => $adapter->getBucket(),
+                'Key' => self::$folder."/".$this->filename
+            ]);
+            return str_replace('"', "", $object->get("ETag"));
+        }
+        return null;
+    }
+
 
     public function getAlternativeTracks() {
         return Track::where("song_id", $this->song_id)->where("id", "!=", $this->id)->get();
