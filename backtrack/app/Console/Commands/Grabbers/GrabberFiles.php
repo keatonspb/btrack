@@ -100,7 +100,6 @@ class GrabberFiles extends BaseGrabber
                 }
                 unlink($tmp_file);
             }
-            exit();
         }
     }
 }

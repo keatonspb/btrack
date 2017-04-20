@@ -30,6 +30,8 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('sitemap:make')
                   ->everyMinute();
+        $schedule->command('grabber:files')
+            ->everyMinute();
     }
 
     /**
