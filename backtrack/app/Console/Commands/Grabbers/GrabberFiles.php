@@ -57,14 +57,15 @@ class GrabberFiles extends BaseGrabber
             $client->get($src, ['save_to' => $tmp_file]);
             if(file_exists($tmp_file)) {
                 $md5 = md5_file($tmp_file);
-                if(DB::table("tracks")->where("hash", $md5)->count()) {
+                if($existsTrack = DB::table("tracks")->where("hash", $md5)->first()) {
                     echo "Track exists\n";
+                    DB::table("backtrack.grab_songs_pages")->where("id", $item->id)->update(['active' => 0, 'track_id'=>$existsTrack->id]);
                     unlink($tmp_file);
                     continue;
                 }
                 $song_name = preg_replace("/\(\d\)/", "", $item->name);
                 $song_name = trim($song_name);
-                echo $song_name;
+                echo $song_name."\n";
                 $row = [
                     "bass" => true,
                     "drums" => true,
@@ -86,11 +87,12 @@ class GrabberFiles extends BaseGrabber
                     $row['status'] = 1;
                     $row['song_id'] = $song->id;
                     $row['user_id'] = 1;
+                    echo "<pre>";
+                    print_r($row);
+                    echo "</pre>";
                     $track = Track::create($row);
                     $File = new UploadedFile($tmp_file, basename($tmp_file));
                     $filename = $track->upload($File);
-                    $track->filename = $filename;
-                    $track->save();
                     DB::table("backtrack.grab_songs_pages")->where("id", $item->id)->update(['active' => 0, 'track_id'=>$track->id]);
                 } catch (\Exception $e) {
                     DB::rollBack();

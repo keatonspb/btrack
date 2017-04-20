@@ -29,7 +29,7 @@ class Track extends Model
     ];
     protected static $folder = "tracks";
     protected $fillable = [
-        'status', 'user_id', 'song_id', 'bass', 'drums', 'vocals', 'lead', 'rhythm', 'keys', 'name'
+        'status', 'user_id', 'song_id', 'bass', 'drums', 'vocals', 'lead', 'rhythm', 'keys', 'name', 'filename', 'url'
     ];
     public function upload(UploadedFile $File) {
         $filename = $this->id.".".$File->getClientOriginalExtension();
@@ -39,6 +39,8 @@ class Track extends Model
             file_get_contents($File->getRealPath()), 'public')) {
             throw new \LogicException("Cant upload");
         }
+        $this->filename = $filename;
+        $this->url = $this->getFilePath();
         $this->hash = $hash;
         $this->save();
         return $filename;
@@ -47,7 +49,11 @@ class Track extends Model
 
 
     public function getFilePath() {
-        return Storage::disk("s3")->url(self::$folder."/".$this->filename);
+        if($this->url) return $this->url;
+        $this->url = Storage::disk("s3")->url(self::$folder."/".$this->filename);
+        $this->save();
+        return $this->url;
+
     }
     public function getFileHash() {
         $adapter = Storage::disk("s3")->getDriver()->getAdapter();
