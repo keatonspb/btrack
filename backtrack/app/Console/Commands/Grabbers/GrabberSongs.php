@@ -38,7 +38,7 @@ class GrabberSongs extends BaseGrabber
     public function handle()
     {
         $client = $this->getClient();
-        $items = DB::table("grab_artists_pages")->where("active", 1)->inRandomOrder()->limit(5)->get();
+        $items = DB::table("grab_artists_pages")->where("active", 1)->inRandomOrder()->limit(10)->get();
         foreach ($items as $item) {
             $artist = Author::find($item->id);
             echo $artist->name."\n";

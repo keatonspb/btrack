@@ -7,11 +7,12 @@ require('jquery-ui/ui/widgets/draggable');
 require('./components/jquery.form.min');
 require('./components/bootstrap-notify.min');
 
+import './components/typeahead.bundle.min';
+
 
 
 
 $(document).ready(function () {
-
     $(".player").btplayer();
     $(".edit_track_form").ajaxForm({
             dataType: "json",
@@ -127,6 +128,7 @@ $(document).ready(function () {
     });
 
     require("./tabs");
+    require('./suggest');
 
 });
 
