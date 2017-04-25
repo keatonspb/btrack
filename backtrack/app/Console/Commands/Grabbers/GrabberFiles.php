@@ -44,7 +44,7 @@ class GrabberFiles extends BaseGrabber
         $items = DB::table("grab_songs_pages")->where("active", 1)->inRandomOrder()->limit(1)->get();
         foreach ($items as $item) {
             echo "Working with url ".$item->href."\n";
-            $res = $client->get($item->href);
+            $res = $client->get($item->href, ['proxy' => $this->getProxy()]);
             $crawler = new Crawler($res->getBody()->getContents());
             $crawlerA = $crawler->filterXPath("//audio[contains(@data-name, 'main-audio')]");
 

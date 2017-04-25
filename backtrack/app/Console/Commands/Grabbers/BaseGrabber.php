@@ -17,6 +17,7 @@ abstract class BaseGrabber extends Command
 {
 
 
+
     /**
      * The console command description.
      *
@@ -24,6 +25,7 @@ abstract class BaseGrabber extends Command
      */
     protected $description = 'Grabber';
     protected $base_url = "https://www.guitarbackingtrack.com";
+    protected $proxy_list = ['192.241.129.78:3128', '152.160.35.171:80', '159.203.34.113:3128'];
 
     protected static $base_headers = [
         'User-Agent' => "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0",
@@ -35,6 +37,10 @@ abstract class BaseGrabber extends Command
             'base_uri' => $this->base_url,
             'headers' => self::$base_headers,
         ]);
+    }
+
+    public function getProxy() {
+        return $this->proxy_list[random_int(0, sizeof($this->proxy_list)-1)];
     }
 
 

@@ -39,6 +39,10 @@ class GrabberSongs extends BaseGrabber
     {
 //        sleep(random_int(3, 15));
         $client = $this->getClient();
+        $proxy = $this->getProxy();
+        echo $proxy;
+        $res = $client->get("https://btrack.xyz", ['proxy' => $proxy]);
+        exit(0);
         $items = DB::table("grab_artists_pages")->where("active", 1)->inRandomOrder()->limit(100)->get();
         foreach ($items as $item) {
             $artist = Author::find($item->id);
@@ -46,7 +50,7 @@ class GrabberSongs extends BaseGrabber
             echo "-----------\n";
             echo $item->href."\n";
             echo "-----------\n";
-            $res = $client->get($item->href, ['proxy' => '152.160.35.171:80']);
+
             $res = $client->get($item->href, ['proxy' => '152.160.35.171:80']);
             $crawler = new Crawler($res->getBody()->getContents());
             $count =0;
