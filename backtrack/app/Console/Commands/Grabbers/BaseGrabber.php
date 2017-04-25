@@ -33,7 +33,7 @@ abstract class BaseGrabber extends Command
     public function getClient() {
         return new Client([
             'base_uri' => $this->base_url,
-            'headers' => self::$base_headers
+            'headers' => self::$base_headers,
         ]);
     }
 

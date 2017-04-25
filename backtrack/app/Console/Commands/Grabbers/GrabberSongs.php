@@ -37,15 +37,20 @@ class GrabberSongs extends BaseGrabber
      */
     public function handle()
     {
+//        sleep(random_int(3, 15));
         $client = $this->getClient();
-        $items = DB::table("grab_artists_pages")->where("active", 1)->inRandomOrder()->limit(10)->get();
+        $items = DB::table("grab_artists_pages")->where("active", 1)->inRandomOrder()->limit(100)->get();
         foreach ($items as $item) {
             $artist = Author::find($item->id);
             echo $artist->name."\n";
             echo "-----------\n";
-            $res = $client->get($item->href);
+            echo $item->href."\n";
+            echo "-----------\n";
+            $res = $client->get($item->href, ['proxy' => '152.160.35.171:80']);
+            $res = $client->get($item->href, ['proxy' => '152.160.35.171:80']);
             $crawler = new Crawler($res->getBody()->getContents());
-            $crawler->filterXPath("//table//div[contains(@class, 'gbt-b-section--table-cell__top')]/a")->each(function (Crawler $node, $i) use ($artist) {
+            $count =0;
+            $crawler->filterXPath("//table//div[contains(@class, 'gbt-b-section--table-cell__top')]/a")->each(function (Crawler $node, $i) use (&$count, $artist) {
                 $href = $node->attr("href");
                 $name = $node->text();
                 $name = preg_replace("/\n/", "", $name);
@@ -57,9 +62,15 @@ class GrabberSongs extends BaseGrabber
                     "href" => $href,
                     "active" => 1
                 ]);
+                $count ++;
                 echo $name . " " . $href . "\n";
             });
-            DB::table("grab_artists_pages")->where("id", $item->id)->update(['active' => 0]);
+            if($count) {
+                DB::table("grab_artists_pages")->where("id", $item->id)->update(['active' => 0]);
+            }
+            echo "-----------\n";
+            echo "EXPORTER: ".$count."\n";
+            echo "-----------\n";
 
         }
     }
