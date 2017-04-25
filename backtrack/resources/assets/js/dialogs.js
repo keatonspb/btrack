@@ -1,4 +1,5 @@
 /**
+ * Dialog
  * Created by default on 04.04.2017.
  */
 $(".open_dialog").click(function () {

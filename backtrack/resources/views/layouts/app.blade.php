@@ -49,7 +49,7 @@
                     <div class="nav navbar-nav">
                             <form class="navbar-form" role="search" action="/search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" style="width: 100%" placeholder="Search" name="q" id="srch-term" value="@yield('search-term')">
+                                    <input type="text" class="form-control suggest" style="width: 100%" placeholder="Search" name="q" id="srch-term" value="@yield('search-term')">
                                     <div class="input-group-btn">
                                         <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                                     </div>
@@ -106,6 +106,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
 @include("frg/counters")
 </body>
 </html>

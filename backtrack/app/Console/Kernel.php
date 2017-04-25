@@ -29,9 +29,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
          $schedule->command('sitemap:make')
-                  ->everyMinute();
-        $schedule->command('grabber:files')
-            ->everyMinute();
+                  ->hourly();
+//        $schedule->command('grabber:songs')
+//            ->everyMinute();
     }
 
     /**
