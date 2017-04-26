@@ -27,8 +27,7 @@ abstract class BaseGrabber extends Command
     protected $base_url = "https://www.guitarbackingtrack.com";
     protected $proxy_list = [
         '152.160.35.171:80',
-        '96.239.193.244:8080',
-        '213.136.89.121:80'
+        '94.181.34.64:80'
         ];
 
     protected static $base_headers = [
