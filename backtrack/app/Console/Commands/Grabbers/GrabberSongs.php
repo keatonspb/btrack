@@ -47,7 +47,6 @@ class GrabberSongs extends BaseGrabber
             echo $item->href."\n";
             echo "-----------\n";
             $res = $client->get($item->href, ['proxy' => '152.160.35.171:80']);
-            $res = $client->get($item->href, ['proxy' => '152.160.35.171:80']);
             $crawler = new Crawler($res->getBody()->getContents());
             $count =0;
             $crawler->filterXPath("//table//div[contains(@class, 'gbt-b-section--table-cell__top')]/a")->each(function (Crawler $node, $i) use (&$count, $artist) {
