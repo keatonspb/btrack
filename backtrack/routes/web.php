@@ -31,3 +31,10 @@ Route::get("/cabinet/track/delete/{track}", 'CabinetController@deleteTrack');
 Route::get("/search", 'SearchController@search');
 
 Route::get("/api/list", 'ApiController@search');
+
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, \Config::get('app.locales'))) {
+        Session::put('locale', $locale);
+    }
+    return redirect()->back();
+});

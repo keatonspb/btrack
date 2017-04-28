@@ -31,7 +31,7 @@
 
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="sr-only">{{__('messages.toogle_navigation')}}</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -57,14 +57,14 @@
                             </form>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li><a href="/cabinet/song/add"><i class="fa fa-plus" aria-hidden="true"></i> Add backing track</a></li>
+                        <li><a href="/cabinet/song/add"><i class="fa fa-plus" aria-hidden="true"></i> {{__('messages.add_backing_track')}}</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('login') }}">{{__('messages.add_backing_track')}}</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
