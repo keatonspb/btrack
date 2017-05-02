@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\Grabbers\GrabberSongs::class,
         \App\Console\Commands\Grabbers\GrabberFiles::class,
         \App\Console\Commands\UpdateFileHash::class,
+        \App\Console\Commands\Grabbers\GrabberTabs::class,
     ];
 
     /**
