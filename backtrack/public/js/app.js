@@ -11876,6 +11876,8 @@ $(".suggest").typeahead(null, {
     name: 'songs',
     display: 'name',
     source: songs
+}).bind('typeahead:select', function (ev, suggestion) {
+    location.href = "/song/" + suggestion.id;
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 

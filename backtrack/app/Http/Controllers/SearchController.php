@@ -46,7 +46,7 @@ class SearchController extends Controller
             $songs = Song::where("songs.name", "like", $query . "%")->orWhere('authors.name', "like", $query . "%");
             $songs->orderBy("created_at", "DESC");
             $songs->leftJoin('authors', 'songs.author_id', '=', 'authors.id');
-            $songs->select("songs.*", "authors.name as author_name");
+            $songs->select("songs.*", "authors.name as author_name", DB::raw("CONCAT_WS(' ', songs.name, '-', authors.name) as name"));
             $json = $songs->get()->toArray();
         }
         return response()->json($json);

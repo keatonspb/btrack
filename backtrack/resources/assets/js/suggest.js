@@ -19,4 +19,6 @@ $(".suggest").typeahead(null, {
     name: 'songs',
     display: 'name',
     source:songs
+}).bind('typeahead:select', function (ev, suggestion) {
+    location.href = "/song/"+suggestion.id;
 });
