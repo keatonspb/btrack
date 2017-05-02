@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         $q = $request->get("q");
-        $songs = Song::where("songs.name", "like", $q."%")->orWhere('authors.name', "like", $q."%");
+        $songs = Song::where("songs.name", "like", $q . "%")->orWhere('authors.name', "like", $q . "%");
         $songs->orderBy("created_at", "DESC");
         $songs->leftJoin('authors', 'songs.author_id', '=', 'authors.id');
         $songs->leftJoin('tracks', 'tracks.song_id', '=', 'songs.id');
@@ -34,7 +35,20 @@ class SearchController extends Controller
         return view('search', [
             "songs" => $songs->paginate(20),
             "searchterm" => $q
-            ]);
+        ]);
 
+    }
+
+    public function autocomplete($query, Request $request)
+    {
+        $json = [];
+        if ($query) {
+            $songs = Song::where("songs.name", "like", $query . "%")->orWhere('authors.name', "like", $query . "%");
+            $songs->orderBy("created_at", "DESC");
+            $songs->leftJoin('authors', 'songs.author_id', '=', 'authors.id');
+            $songs->select("songs.*", "authors.name as author_name");
+            $json = $songs->get()->toArray();
+        }
+        return response()->json($json);
     }
 }
