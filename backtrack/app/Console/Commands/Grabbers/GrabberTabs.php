@@ -46,12 +46,26 @@ class GrabberTabs extends BaseGrabber
 
         foreach ($songs->get() as $song) {
             $searchq =  $song->name." - ".$song->author_name;
-            echo $searchq ."\n";
-            $url = "search.php?search_type=title&order=&value=".$searchq;
+            $url = "/search.php?view_state=advanced&band_name={$song->author_name}&song_name={$song->name}&type[]=200&type2[]=40000&rating[]=5&rating[]=4";
             echo $url."\n";
             $res = $client->get($url);
-            echo $res->getBody()->getContents();
             $crawler = new Crawler($res->getBody()->getContents());
+            $links = [];
+            try {
+                $crawler->filterXPath("//table[contains(@class, 'tresults')]//tr")
+                    ->each(function (Crawler $node, $i) use (&$links) {
+                        $text = $node->html();
+                        if(str_contains($text,"<strong>tab</strong>")) {
+                            $res = $node->filterXPath("//a[contains(@class, 'result-link')]")->first();
+                            $links[] = $res->attr("href");
+                        }
+                    });
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+            }
+            echo "<pre>";
+            print_r($links);
+            echo "</pre>";
         }
 
     }
