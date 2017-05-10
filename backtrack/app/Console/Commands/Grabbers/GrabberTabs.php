@@ -63,9 +63,19 @@ class GrabberTabs extends BaseGrabber
             } catch (\Exception $e) {
                 echo $e->getMessage();
             }
-            echo "<pre>";
-            print_r($links);
-            echo "</pre>";
+            foreach ($links as $link) {
+                echo $link."\n";
+                $tuning = null;
+                $res = $client->get($link);
+                $crawler = new Crawler($res->getBody()->getContents());
+                $res = $crawler->filterXPath("//div[contains(@class, 'b-tab-meta')]//div[contains(@class, 't_dtde')]");
+                $tuning_res = $res->text();
+                if($tuning_res) {
+
+                }
+                echo $res->text()."\n";
+                exit();
+            }
         }
 
     }
