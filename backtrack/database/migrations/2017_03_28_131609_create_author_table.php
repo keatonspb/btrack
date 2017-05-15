@@ -17,6 +17,7 @@ class CreateAuthorTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string("name")->unique();
+            $table->char("alias", 100)->unique();
         });
     }
 

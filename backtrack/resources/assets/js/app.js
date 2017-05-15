@@ -7,8 +7,9 @@ require('jquery-ui/ui/widgets/draggable');
 require('./components/jquery.form.min');
 require('./components/bootstrap-notify.min');
 
-import './components/typeahead.bundle.min';
 
+import "./tabs";
+import './suggest';
 
 
 
@@ -127,8 +128,7 @@ $(document).ready(function () {
         return false;
     });
 
-    require("./tabs");
-    require('./suggest');
+
 
 });
 

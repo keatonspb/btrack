@@ -31,7 +31,7 @@
 
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="sr-only">{{__('messages.toogle_navigation')}}</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -49,7 +49,7 @@
                     <div class="nav navbar-nav">
                             <form class="navbar-form" role="search" action="/search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control suggest" style="width: 100%" placeholder="Search" name="q" id="srch-term" value="@yield('search-term')">
+                                    <input type="text" class="form-control suggest" autocomplete="off" style="width: 100%; float: none;" placeholder="Search" name="q" value="@yield('search-term')">
                                     <div class="input-group-btn">
                                         <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                                     </div>
@@ -57,14 +57,14 @@
                             </form>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li><a href="/cabinet/song/add"><i class="fa fa-plus" aria-hidden="true"></i> Add backing track</a></li>
+                        <li><a href="/cabinet/song/add"><i class="fa fa-plus" aria-hidden="true"></i> {{__('messages.add_backing_track')}}</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('login') }}">{{__('messages.add_backing_track')}}</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

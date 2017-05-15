@@ -1,18 +1,24 @@
 /**
  * Created by Keaton on 21.04.2017.
  */
-
+require('./components/typeahead.jquery');
+var Bloodhound = require('./components/bloodhound');
 
 
 // instantiate the bloodhound suggestion engine
-var numbers = new Bloodhound({
+var songs = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.whitespace,
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local:  ["(A)labama","Alaska","Arizona","Arkansas","Arkansas2","Barkansas"]
+    remote: {
+        url: '/search/%QUERY.json',
+        wildcard: '%QUERY'
+    }
 });
-numbers.initialize();
 
-$(".suggest").typeahead({
-    items: 4,
-    source:numbers.ttAdapter()
+$(".suggest").typeahead(null, {
+    name: 'songs',
+    display: 'name',
+    source:songs
+}).bind('typeahead:select', function (ev, suggestion) {
+    location.href = "/song/"+suggestion.id;
 });
