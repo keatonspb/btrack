@@ -30,7 +30,7 @@ class HomeController extends Controller
         $songs->leftJoin('authors', 'songs.author_id', '=', 'authors.id');
         $songs->leftJoin('tracks', 'tracks.song_id', '=', 'songs.id');
         $songs->groupBy("songs.id");
-        $songs->select("songs.*", "authors.name as author_name", DB::raw("COUNT(tracks.id) as tcount"),
+        $songs->select("songs.*", "authors.name as author_name", "authors.alias as author_alias", DB::raw("COUNT(tracks.id) as tcount"),
             DB::raw("SUM(tracks.bass) as bass"),
             DB::raw("SUM(tracks.drums) as drums"),
             DB::raw("SUM(tracks.vocals) as vocals"),
@@ -44,8 +44,14 @@ class HomeController extends Controller
     ]);
     }
 
-    public function song($id, $track_id = null, Request $request) {
-        $song = Song::find($id);
+    public function song($artist_alias, $song_alias = null, $track_id = null, Request $request) {
+        if(is_numeric($artist_alias)) {
+            $song = Song::find($artist_alias);
+            return redirect($song->getHref(), 301);
+        } else {
+            $song = Song::where("alias", $song_alias)->first();
+        }
+
         if(!$song) {
             abort(404);
         }
@@ -54,6 +60,10 @@ class HomeController extends Controller
         } else {
             $track = $song->tracks->first();
         }
+        if(!$track) {
+            abort(404);
+        }
+
         $tabsCol = $song->tabs()->leftJoin('tunings', 'tunings.id', '=', 'tabs.tuning_id')->select("tabs.*", "tunings.name as tuning_name", "tunings.strings as tuning_strings")->get();
         $tabs = [];
         $tabs_instruments = [];

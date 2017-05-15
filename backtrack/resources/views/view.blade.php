@@ -50,7 +50,7 @@
                         <ul class="list-group">
                             @foreach($alttracks as $alttrack)
                                 <li class="list-group-item">
-                                    <a href="/song/{{$song->id}}/{{$alttrack->id}}">
+                                    <a href="/song/{{$author->alias}}/{{$song->alias}}/{{$alttrack->id}}">
                                         @include('frg/instruments', ['track'=>$alttrack])
                                     </a>
                                 </li>

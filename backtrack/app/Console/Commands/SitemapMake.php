@@ -34,7 +34,7 @@ class SitemapMake extends Command
         $sitemap = App::make("sitemap");
         $songs = Song::orderBy("created_at", "desc")->get();
         foreach ($songs as $song) {
-            $sitemap->add("http://btrack.xyz/song/".$song->id, $song->created_at, "0.5", "monthly");
+            $sitemap->add("http://btrack.xyz".$song->getHref(), $song->created_at, "0.5", "monthly");
         }
         $sitemap->store('xml', 'sitemap');
     }

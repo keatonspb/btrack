@@ -90,7 +90,7 @@ class Track extends Model
     public function delete()
     {
         if(!Storage::disk("s3")->delete(self::$folder."/".$this->filename)) {
-            throw new \LogicException("Cant delete dile");
+//            throw new \LogicException("Cant delete file");
         }
         return parent::delete();
     }

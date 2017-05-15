@@ -51,7 +51,30 @@ class Song extends Model
                 "status" => 1,
                 "author_id" => $author->id
             ]);
+            $song->createAlias();
         }
         return $song;
+    }
+
+    public function getHref() {
+        return "/song/".$this->author->alias."/".$this->alias;
+    }
+
+    public function createAlias() {
+        if($this->alias) return true;
+        $working = true;
+        $suf = "";
+        $name = mb_strtolower($this->name);
+        while ($working) {
+            $alias = Helper::translitirate($name.$suf);
+            if(Song::where("alias", $alias)->count()) {
+                $suf .= "_";
+                continue;
+            }
+            $this->alias = $alias;
+            $this->save();
+            $working = false;
+        }
+        return $this->alias;
     }
 }

@@ -23,7 +23,7 @@ class SearchController extends Controller
         $songs->leftJoin('authors', 'songs.author_id', '=', 'authors.id');
         $songs->leftJoin('tracks', 'tracks.song_id', '=', 'songs.id');
         $songs->groupBy("songs.id");
-        $songs->select("songs.*", "authors.name as author_name", DB::raw("COUNT(tracks.id) as tcount"),
+        $songs->select("songs.*", "authors.name as author_name", "authors.alias as author_alias", DB::raw("COUNT(tracks.id) as tcount"),
             DB::raw("SUM(tracks.bass) as bass"),
             DB::raw("SUM(tracks.drums) as drums"),
             DB::raw("SUM(tracks.vocals) as vocals"),

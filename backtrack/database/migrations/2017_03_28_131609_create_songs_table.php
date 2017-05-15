@@ -20,6 +20,7 @@ class CreateSongsTable extends Migration
             $table->integer('author_id', false, true)->nullable();
             $table->foreign("author_id")->references('id')->on('authors')->onDelete('set null');
             $table->string("name");
+            $table->char("alias", 100)->unique();
         });
     }
 
