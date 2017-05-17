@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', $song->name . " ". $author->name . " backing track and tabs")
+@section('description', 'Free guitar backing track for '.$song->name . " - ". $author->name )
 @section('content')
     <div class="container">
 
