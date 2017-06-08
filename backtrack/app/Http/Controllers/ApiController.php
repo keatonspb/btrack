@@ -25,7 +25,7 @@ class ApiController extends Controller
         $songs->select("songs.*", "authors.name as author_name");
         $songs->with("tracks");
         $json = $songs->paginate(10)->toArray();
-        return json_encode($json);
+        return json_encode($json); 
 
     }
 }
