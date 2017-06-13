@@ -102,5 +102,6 @@ class GrabberFiles extends BaseGrabber
                 unlink($tmp_file);
             }
         }
+        echo "Work done ";
     }
 }
