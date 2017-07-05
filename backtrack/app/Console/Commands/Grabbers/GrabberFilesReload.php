@@ -39,6 +39,7 @@ class GrabberFilesReload extends BaseGrabber
      */
     public function handle()
     {
+        exit();
         $tmp_folder = "/var/www/backtrack/www/public/";
         $client = $this->getClient();
         $items = DB::table("grab_songs_pages")->where("active", 1)->whereNotNull("track_id")->inRandomOrder()->limit(100)->get();

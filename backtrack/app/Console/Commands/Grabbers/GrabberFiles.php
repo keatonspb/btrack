@@ -41,7 +41,7 @@ class GrabberFiles extends BaseGrabber
     {
         $tmp_folder = "/var/www/backtrack/www/public/";
         $client = $this->getClient();
-        $items = DB::table("grab_songs_pages")->where("active", 1)->inRandomOrder()->limit(1)->get();
+        $items = DB::table("grab_songs_pages")->where("active", 1)->inRandomOrder()->limit(100)->get();
         foreach ($items as $item) {
             echo "Working with url ".$item->href."\n";
 //            $res = $client->get($item->href, ['proxy' => $this->getProxy()]);
@@ -102,5 +102,6 @@ class GrabberFiles extends BaseGrabber
                 unlink($tmp_file);
             }
         }
+        echo "Work done ";
     }
 }

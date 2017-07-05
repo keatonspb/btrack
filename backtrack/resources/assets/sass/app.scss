@@ -5,6 +5,7 @@
 @import "_variables";
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/jquery-bar-rating/dist/themes/fontawesome-stars";
 @import "plugins/typeahead";
 
 
@@ -249,5 +250,12 @@ $player-part-height: 20px;
   }
   .content {
     font-family: 'Ubuntu Mono', monospace;
+  }
+}
+.br-theme-fontawesome-stars-o, .br-theme-fontawesome-stars {
+  .br-widget {
+    a.br-selected::after, a.br-fractional::after, a.br-active:after {
+      color: $brand-success;
+    }
   }
 }

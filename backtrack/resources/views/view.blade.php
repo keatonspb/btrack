@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', $song->name . " ". $author->name . " backing track and tabs")
+@section('description', 'Free guitar backing track for '.$song->name . " - ". $author->name )
 @section('content')
     <div class="container">
 
@@ -18,6 +19,9 @@
                     </div>
                     <div class="panel-footer">
                         @include('frg/instruments', ['track'=>$track])
+                        <div class="pull-right">
+                        @include('frg/rating', ['track'=>$track])
+                        </div>
                     </div>
                 </div>
                 @if($tabs_instruments)

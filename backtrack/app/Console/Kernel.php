@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\UpdateFileHash::class,
         \App\Console\Commands\Grabbers\GrabberTabs::class,
         \App\Console\Commands\MakeAlias::class,
+        \App\Console\Commands\Grabbers\GrabberLocal::class,
     ];
 
     /**

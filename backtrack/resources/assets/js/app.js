@@ -3,6 +3,7 @@ require('./bootstrap');
 require('./player');
 require('jquery-ui');
 require('jquery-ui/ui/widgets/draggable');
+require('jquery-bar-rating/dist/jquery.barrating.min')
 
 require('./components/jquery.form.min');
 require('./components/bootstrap-notify.min');
@@ -14,7 +15,30 @@ import './suggest';
 
 
 $(document).ready(function () {
+
     $(".player").btplayer();
+    $('.rating').barrating({
+        emptyValue: 0,
+        theme: 'fontawesome-stars',
+        onSelect: function (value, text, event) {
+            if (typeof(event) !== 'undefined') {
+                // rating was selected by a user
+                console.log(value, event);
+                var track = $(event.target).parents(".br-wrapper").first().find("select").data("track")
+                $.getJSON("/track/rate/"+track, {
+                    rate: value,
+                }, function (json) {
+
+                });
+            }
+        }
+    });
+    $(".rating").each(function (i, e) {
+        console.info(i, e, this);
+        $(e).barrating('set', parseFloat($(e).data("rating")));
+    });
+
+
     $(".edit_track_form").ajaxForm({
             dataType: "json",
             success: function (json, statusText, xhr, $form) {

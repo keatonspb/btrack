@@ -6,6 +6,7 @@ use App\Song;
 use App\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HomeController extends Controller
 {
@@ -79,7 +80,6 @@ class HomeController extends Controller
             $tabs_instruments[$tab->instrument]['tabs'][] = $tab;
             $tabs_instruments[$tab->instrument]['count_tabs']++;
         }
-
         return view('view', [
             "song" => $song,
             "author" => $song->author,
@@ -89,4 +89,29 @@ class HomeController extends Controller
 
         ]);
     }
+
+    /**
+     * Оценка трэка
+     * @param $track
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function rate($track, Request $request) {
+        $json = ['success' => true];
+        $cookie = cookie('uniqueId', '');
+        try {
+            $user_key = $request->cookie("uniqueId");
+
+
+            $track = Track::findOrFail($track);
+            /* @var $track \App\Track */
+            $track->rate($request->get("rate", 0), $user_key);
+        } catch (\Exception $e) {
+            $json['success'] = false;
+            $json['message'] = $e->getMessage();
+        }
+        return response()->json($json)->cookie($cookie);
+    }
+
+
 }

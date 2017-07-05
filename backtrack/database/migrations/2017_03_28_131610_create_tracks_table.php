@@ -17,6 +17,7 @@ class CreateTracksTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->boolean("status");
+            $table->decimal("rating", 3, 2);
             $table->integer('song_id', false, true);
             $table->foreign("song_id")->references('id')->on('songs')->onDelete('cascade');
             $table->integer('user_id', false, true)->nullable();
