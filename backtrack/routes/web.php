@@ -33,7 +33,7 @@ Route::get("/track/rate/{track}", 'HomeController@rate');
 Route::get("/search", 'SearchController@search');
 Route::get("/search/{query}.json", 'SearchController@autocomplete');
 
-Route::get("/api/list", 'ApiController@search');
+Route::get("/api/tracks", 'ApiController@searchTracks');
 
 Route::get('lang/{locale}', function ($locale) {
     if (in_array($locale, \Config::get('app.locales'))) {

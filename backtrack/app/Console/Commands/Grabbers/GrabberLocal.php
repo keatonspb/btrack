@@ -79,7 +79,7 @@ class GrabberLocal extends BaseGrabber
                 DB::rollBack();
                 echo "ERROR: ".$e->getMessage()."\n";
             }
-            break;
+
         }
 
     }

@@ -67,6 +67,9 @@ class Track extends Model
         return null;
     }
 
+    public function tracks() {
+        return $this->hasMany("App\Track", "song_id", "song_id");
+    }
 
     public function getAlternativeTracks() {
         return Track::where("song_id", $this->song_id)->where("id", "!=", $this->id)->get();

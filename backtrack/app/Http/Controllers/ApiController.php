@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Song;
+use App\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -29,6 +30,23 @@ class ApiController extends Controller
 
         $json = $songs->paginate(10)->appends($appends)->toArray();
         return json_encode($json); 
+
+    }
+
+    public function searchTracks(Request $request) {
+        $q = $request->get("q");
+        $tracks = Track::orderBy("tracks.created_at", "DESC");
+        $tracks->with("tracks");
+        $tracks->leftJoin('songs', "tracks.song_id", "=", "songs.id");
+        $tracks->leftJoin('authors', 'songs.author_id', '=', 'authors.id');
+        $appends = [];
+        if($q) {
+            $tracks->where("songs.name", "like", $q."%")->orWhere('authors.name', "like", $q."%");
+            $appends['q'] = $q;
+        }
+        $tracks->select("songs.name", "authors.name as author_name", "tracks.*");
+        $json = $tracks->paginate(10)->appends($appends)->toArray();
+        return json_encode($json);
 
     }
 }
