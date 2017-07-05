@@ -29,7 +29,7 @@ class Track extends Model
     ];
     protected static $folder = "tracks";
     protected $fillable = [
-        'status', 'user_id', 'song_id', 'bass', 'drums', 'vocals', 'lead', 'rhythm', 'keys', 'name', 'filename', 'url'
+        'status', 'user_id', 'song_id', 'bass', 'drums', 'vocals', 'lead', 'rhythm', 'keys', 'name', 'filename', 'url', 'rating'
     ];
     public function upload(UploadedFile $File) {
         $filename = $this->id.".".$File->getClientOriginalExtension();
@@ -93,5 +93,28 @@ class Track extends Model
 //            throw new \LogicException("Cant delete file");
         }
         return parent::delete();
+    }
+
+    /**
+     * Оценка трека
+     * @param $rate
+     */
+    public function rate($rate, $user) {
+        Rating::updateOrCreate(
+            [
+                'track_id' => $this->id,
+                'rater' => $user
+            ],
+            [
+            'track_id' => $this->id,
+            'rate' => $rate,
+            'rater' => $user
+        ]);
+        $this->rebuildRating();
+    }
+
+    private function rebuildRating() {
+        $this->rating =  \DB::table('rating')->where("track_id", "=",$this->id)->avg("rate");
+        $this->save();
     }
 }

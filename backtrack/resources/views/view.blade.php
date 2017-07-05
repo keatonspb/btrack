@@ -19,6 +19,9 @@
                     </div>
                     <div class="panel-footer">
                         @include('frg/instruments', ['track'=>$track])
+                        <div class="pull-right">
+                        @include('frg/rating', ['track'=>$track])
+                        </div>
                     </div>
                 </div>
                 @if($tabs_instruments)

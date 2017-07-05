@@ -28,6 +28,7 @@ Route::post('/cabinet/tabs/save', 'TabController@save');
 Route::get('/cabinet/tabs/get/{id}', 'TabController@get');
 Route::get('/cabinet/tabs/{tab}/delete', 'TabController@delete');
 Route::get("/cabinet/track/delete/{track}", 'CabinetController@deleteTrack');
+Route::get("/track/rate/{track}", 'HomeController@rate');
 
 Route::get("/search", 'SearchController@search');
 Route::get("/search/{query}.json", 'SearchController@autocomplete');
