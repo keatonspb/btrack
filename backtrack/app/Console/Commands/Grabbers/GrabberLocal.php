@@ -80,6 +80,7 @@ class GrabberLocal extends BaseGrabber
                 echo "ERROR: ".$e->getMessage()."\n";
             }
 
+
         }
 
     }
