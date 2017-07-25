@@ -59,7 +59,8 @@
                             </form>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li><a href="/cabinet/song/add"><i class="fa fa-plus" aria-hidden="true"></i> {{__('messages.add_backing_track')}}</a></li>
+                        <li><a href="/search?q=&type=guitar">For guitar</a></li>
+                        <li><a href="/search?q=&type=drums">For drummers</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -72,8 +73,8 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/cabinet/song/add"><i class="fa fa-plus" aria-hidden="true"></i> {{__('messages.add_backing_track')}}</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

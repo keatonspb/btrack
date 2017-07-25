@@ -18,7 +18,14 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         $q = $request->get("q");
-        $songs = Song::where("songs.name", "like", $q . "%")->orWhere('authors.name', "like", $q . "%");
+        $title = "Search for ". $q ." in {type} and tabs for free";
+        if(!$q) {
+            $title = "All {type} and tabs for free";
+        }
+
+        $songs = Song::where(function ($query) use ($q) {
+            $query->where("songs.name", "like", $q . "%")->orWhere('authors.name', "like", $q . "%");
+        });
         $songs->orderBy("created_at", "DESC");
         $songs->leftJoin('authors', 'songs.author_id', '=', 'authors.id');
         $songs->leftJoin('tracks', 'tracks.song_id', '=', 'songs.id');
@@ -32,9 +39,44 @@ class SearchController extends Controller
             DB::raw("SUM(tracks.keys) as 'keys'")
         );
         $songs->with("tabs");
+
+        if($type = $request->get("type")) {
+            switch ($type) {
+                case "guitar":
+                    $songs->where(function ($query) {
+                        $query->where("tracks.lead", "=", 0)->orWhere("tracks.rhythm", "=", 0);
+                    });
+                    $title = str_replace("{type}", "guitar backing tracks", $title);
+                    break;
+                case "drums":
+                    $songs->where("tracks.drums", "=", 0);
+                    $title = str_replace("{type}", "drums backing tracks", $title);
+                    break;
+            }
+        } else {
+            $title = str_replace("{type}", "guitar and drums backing tracks", $title);
+            $type = "both";
+        }
+
+        if($vocal = $request->get("vocal")) {
+            switch ($vocal) {
+                case "yes":
+                    $songs->where("tracks.vocals", "=", 1);
+                    break;
+                case "no":
+                    $songs->where("tracks.vocals", "=", 0);
+                    break;
+            }
+        } else {
+            $vocal = "both";
+        }
+
         return view('search', [
             "songs" => $songs->paginate(20),
-            "searchterm" => $q
+            "searchterm" => $q,
+            "form_type" => $type,
+            "form_vocal" => $vocal,
+            "page_title" => $title,
         ]);
 
     }
