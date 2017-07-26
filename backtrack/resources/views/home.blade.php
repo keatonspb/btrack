@@ -14,7 +14,9 @@
             </div>
         </div>
     </div>
+    @include("frg.discus")
 </div>
+
 @endsection
 @section('title', 'Guitar, Drums backtracks and tabs for free')
 @section('description', 'Lots of guitar and Drums backtracks and tabs. Best source of your inspiration.')
