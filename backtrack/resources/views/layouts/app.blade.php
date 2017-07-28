@@ -15,13 +15,13 @@
     <!-- Styles -->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <link rel="icon" href=​"/favicon.ico" type="image/x-icon">
 
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
-        ]) !!};
+        ]) !!}; 
     </script>
 </head>
 <body>
@@ -98,10 +98,16 @@
     </div>
     <footer>
         <div class="container">
-            <div class="disclamer">All original tracks and lyrics are property and copyright of their owners. Information on this page provided for educational purposes and personal use only.</div>
-            <div class="contacts">
-                For any questions discodeprojects@gmail.com
+            <div class="col-lg-10">
+                <div class="disclamer">All original tracks and lyrics are property and copyright of their owners. Information on this page provided for educational purposes and personal use only.</div>
+                <div class="contacts">
+                    For any questions discodeprojects@gmail.com
+                </div>
             </div>
+            <div class="col-lg-2">
+                <a target="_blank" href='https://play.google.com/store/apps/details?id=ru.discode.batrack&utm_source=web&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img  style="width: 100%;" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+            </div>
+
         </div>
 
     </footer>
