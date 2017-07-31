@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @include("frg.banner")
+
 <div class="container">
 
     <div class="row">
