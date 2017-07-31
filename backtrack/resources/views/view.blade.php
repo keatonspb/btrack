@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{$song->name}} - {{$author->name}}
+                    <div class="panel-heading">{{$song->name}} - <a href="/song/{{$author->alias}}">{{$author->name}}</a>
                         @if(Auth::check() && Auth::user()->id == $track->user_id)
                         <div class="pull-right">
                             <a class="btn btn-info btn-xs" href="/cabinet/track/edit/{{$track->id}}">Edit track</a>

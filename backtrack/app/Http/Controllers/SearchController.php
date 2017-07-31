@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\Song;
+use App\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,22 +24,14 @@ class SearchController extends Controller
             $title = "All {type} and tabs for free";
         }
 
-        $songs = Song::where(function ($query) use ($q) {
+        $songs = Track::where(function ($query) use ($q) {
             $query->where("songs.name", "like", $q . "%")->orWhere('authors.name', "like", $q . "%");
         });
-        $songs->orderBy("created_at", "DESC");
+        $songs->orderBy("tracks.rating", "DESC")->orderBy("tracks.created_at", "DESC");
+        $songs->leftJoin('songs', 'tracks.song_id', '=', 'songs.id');
         $songs->leftJoin('authors', 'songs.author_id', '=', 'authors.id');
-        $songs->leftJoin('tracks', 'tracks.song_id', '=', 'songs.id');
-        $songs->groupBy("songs.id");
-        $songs->select("songs.*", "authors.name as author_name", "authors.alias as author_alias", DB::raw("COUNT(tracks.id) as tcount"),
-            DB::raw("SUM(tracks.bass) as bass"),
-            DB::raw("SUM(tracks.drums) as drums"),
-            DB::raw("SUM(tracks.vocals) as vocals"),
-            DB::raw("SUM(tracks.lead) as lead"),
-            DB::raw("SUM(tracks.rhythm) as rhythm"),
-            DB::raw("SUM(tracks.keys) as 'keys'")
-        );
-        $songs->with("tabs");
+        $songs->select("songs.*", "authors.name as author_name", "authors.alias as author_alias", "tracks.*");
+//        $songs->with("song");
 
         if($type = $request->get("type")) {
             switch ($type) {
