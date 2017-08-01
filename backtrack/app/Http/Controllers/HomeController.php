@@ -10,6 +10,17 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HomeController extends Controller
 {
+    const SEARCH_EXAMPLES = [
+        'Smells Like Teen Spirit',
+        'How You Remind Me',
+        'Everlong',
+        'Foo Fighters',
+        'Green Day',
+        'Metallica',
+        'U2',
+        'AC/DC',
+        'Iron Maiden'
+    ];
     /**
      * Create a new controller instance.
      *
@@ -26,6 +37,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $tracks_count = Track::where("status", "=", "1")->count();
+
         $songs = Song::orderBy("created_at", "DESC");
 
         $songs->leftJoin('authors', 'songs.author_id', '=', 'authors.id');
@@ -40,9 +53,12 @@ class HomeController extends Controller
             DB::raw("SUM(tracks.keys) as 'keys'")
             );
         $songs->with("tabs");
+
         return view('home', [
-            "songs" => $songs->paginate(20)
-    ]);
+            "songs" => $songs->paginate(20),
+            "tracks_count" => $tracks_count,
+            "search_example" => self::SEARCH_EXAMPLES[array_rand(self::SEARCH_EXAMPLES)],
+        ]);
     }
 
     public function song($artist_alias, $song_alias = null, $track_id = null, Request $request) {
@@ -85,7 +101,7 @@ class HomeController extends Controller
             "author" => $song->author,
             "track" => $track,
             "alttracks" => $track->getAlternativeTracks(),
-            "tabs_instruments" => $tabs_instruments
+            "tabs_instruments" => $tabs_instruments,
 
         ]);
     }

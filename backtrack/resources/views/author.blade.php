@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    @include("frg.banner")
-
 <div class="container">
 
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Last added</div>
+                <div class="panel-heading">{{$author_name}} backing tracks </div>
 
                 <div class="panel-body">
                     @include("frg/songs_list")
@@ -16,7 +14,6 @@
             </div>
         </div>
     </div>
-    @include("frg.discus")
 </div>
 
 @endsection

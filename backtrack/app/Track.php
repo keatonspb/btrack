@@ -120,4 +120,9 @@ class Track extends Model
         $this->rating =  \DB::table('rating')->where("track_id", "=",$this->id)->avg("rate");
         $this->save();
     }
+
+    public function tabs()
+    {
+        return $this->hasMany('App\Tab', "song_id", "song_id");
+    }
 }
