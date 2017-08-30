@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\Grabbers\GrabberTabs::class,
         \App\Console\Commands\MakeAlias::class,
         \App\Console\Commands\Grabbers\GrabberLocal::class,
+        \App\Console\Commands\Test::class,
     ];
 
     /**

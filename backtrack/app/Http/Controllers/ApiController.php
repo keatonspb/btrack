@@ -35,7 +35,7 @@ class ApiController extends Controller
 
     public function searchTracks(Request $request) {
         $q = $request->get("q");
-        $tracks = Track::orderBy("tracks.rating", "DESC")->orderBy("tracks.created_at", "DESC");
+        $tracks = Track::orderBy("tracks.created_at", "DESC");
 
         $tracks->with("tracks");
         $tracks->leftJoin('songs', "tracks.song_id", "=", "songs.id");
